@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <script src="~/Scripts/jquery-1.11.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Scripts/jquery.flexslider.js"></script>
+    <script src="~/Scripts/waypoints.min.js"></script>
+    <script src="~/Scripts/modernizr.js"></script>
+    <script src="~/Scripts/bootstrap-hover-dropdown.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/front.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/animate.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/owl.carousel.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/owl.theme.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/style.default.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/owl.transitions.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/style.blue.css")" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/respond.min.js"></script>
+
+</head>
+<body>
+
+    <div id="top">
+        <div class="container">
+            <div class="col-md-6 offer" data-animate="fadeInDown">
+                <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>
+            </div>
+            <div class="col-md-6" data-animate="fadeInDown">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+
+                <a class="navbar-brand home" href="@Url.Action("Index", "Home")" data-animate-hover="bounce">
+                    <img src="@Url.Content("~/Content/img/")logo.png" alt="Obaju logo" class="hidden-xs">
+                    <img src="@Url.Content("~/Content/img/")logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
+                </a>
+                <div class="navbar-buttons">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <a class="btn btn-default navbar-toggle" href="@Url.Action("Index", "Cart")">
+                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">3 items in cart</span>
+                    </a>
+                </div>
+            </div>
+            <!--/.navbar-header -->
+
+            <div class="navbar-collapse collapse" id="navigation">
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Index") && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=active" : "")>
+                        <a href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Special") && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=active" : "")>
+                        <a href="@Url.Action("Special", "Product")">Specials</a>
+                    </li>
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Latest") && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=active" : "")>
+                        <a href="@Url.Action("Latest", "Product")">Latests</a>
+                    </li>
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Index") && ViewContext.RouteData.Values["controller"].ToString().Equals("Blog") ? "class=active dropdown yamm-fw" : "dropdown yamm-fw")>
+                        <a href="@Url.Action("Index", "Blog")">Blog</a>
+                    </li>
+                    <li class="dropdown yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h5>Clothing</h5>
+                                            <ul>
+                                                @{
+                                                    Html.RenderAction("_navbarCategories", "Master");
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Shoes</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="category.html">Trainers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Sandals</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Casual</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Accessories</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="category.html">Trainers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Sandals</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Casual</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Casual</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Featured</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="category.html">Trainers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Sandals</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                            </ul>
+                                            <h5>Looks and trends</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="category.html">Trainers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Sandals</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.yamm-content -->
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Ladies <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h5>Clothing</h5>
+                                            <ul>
+                                                @{
+                                                    Html.RenderAction("_navbarCategories","Master");
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Shoes</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="category.html">Trainers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Sandals</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Casual</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Accessories</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="category.html">Trainers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Sandals</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Casual</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Casual</a>
+                                                </li>
+                                            </ul>
+                                            <h5>Looks and trends</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="category.html">Trainers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Sandals</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Hiking shoes</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="banner">
+                                                <a href="#">
+                                                    <img src="@Url.Content("~/Content/img/")banner.jpg" class="img img-responsive" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="banner">
+                                                <a href="#">
+                                                    <img src="@Url.Content("~/Content/img/")banner2.jpg" class="img img-responsive" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.yamm-content -->
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h5>Shop</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="index.html">Homepage</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Category - sidebar left</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category-right.html">Category - sidebar right</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category-full.html">Category - full width</a>
+                                                </li>
+                                                <li>
+                                                    <a href="detail.html">Product detail</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>User</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="@Url.Action("Register", "Account")">Register / login</a>
+                                                </li>
+                                                <li>
+                                                    <a href="customer-orders.html">Orders history</a>
+                                                </li>
+                                                <li>
+                                                    <a href="customer-order.html">Order history detail</a>
+                                                </li>
+                                                <li>
+                                                    <a href="customer-wishlist.html">Wishlist</a>
+                                                </li>
+                                                <li>
+                                                    <a href="customer-account.html">Customer account / change password</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Order process</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="basket.html">Shopping cart</a>
+                                                </li>
+                                                <li>
+                                                    <a href="checkout1.html">Checkout - step 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="checkout2.html">Checkout - step 2</a>
+                                                </li>
+                                                <li>
+                                                    <a href="checkout3.html">Checkout - step 3</a>
+                                                </li>
+                                                <li>
+                                                    <a href="checkout4.html">Checkout - step 4</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h5>Pages and blog</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="@Url.Action("FAQ", "AboutUs")">FAQ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("NotFound", "Error")">404 page</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Contact", "AboutUs")">Contact</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.yamm-content -->
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <!--/.nav-collapse -->
+
+            <div class="navbar-buttons">
+
+                <div class="navbar-collapse collapse right" id="basket-overview">
+                    <a href="@Url.Action("Index", "Cart")" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                </div>
+                <!--/.nav-collapse -->
+
+                <div class="navbar-collapse collapse right" id="search-not-mobile">
+                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="collapse clearfix" id="search">
+
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <span class="input-group-btn">
+
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+                        </span>
+                    </div>
+                </form>
+
+            </div>
+            <!--/.nav-collapse -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+
+    <div id="all">
+        <div id="content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <div id="footer" data-animate="fadeInUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <h4>Pages</h4>
+
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("Index", "AboutUs")">About us</a>
+                        </li>
+                        <li>
+                            <a href="text.html">Terms and conditions</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Contact", "AboutUs")">Contact us</a>
+                        </li>
+                    </ul>
+
+                    <hr>
+
+                    <h4>User section</h4>
+
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("Register", "Account")" data-toggle="modal" data-target="#login-modal">Login</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Register", "Account")">Register</a>
+                        </li>
+                    </ul>
+
+                    <hr class="hidden-md hidden-lg hidden-sm">
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+
+                    <h4>Top categories</h4>
+
+                    <h5>Men</h5>
+
+                    <ul>
+                        <li>
+                            <a href="category.html">T-shirts</a>
+                        </li>
+                        <li>
+                            <a href="category.html">Shirts</a>
+                        </li>
+                        <li>
+                            <a href="category.html">Accessories</a>
+                        </li>
+                    </ul>
+
+                    <h5>Ladies</h5>
+                    <ul>
+                        <li>
+                            <a href="category.html">T-shirts</a>
+                        </li>
+                        <li>
+                            <a href="category.html">Skirts</a>
+                        </li>
+                        <li>
+                            <a href="category.html">Pants</a>
+                        </li>
+                        <li>
+                            <a href="category.html">Accessories</a>
+                        </li>
+                    </ul>
+
+                    <hr class="hidden-md hidden-lg">
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+
+                    <h4>Where to find us</h4>
+
+                    <p>
+                        <strong>Obaju Ltd.</strong>
+                        <br>13/25 New Avenue
+                        <br>New Heaven
+                        <br>45Y 73J
+                        <br>England
+                        <br>
+                        <strong>Great Britain</strong>
+                    </p>
+
+                    <a href="contact.html">Go to contact page</a>
+
+                    <hr class="hidden-md hidden-lg">
+
+                </div>
+                <!-- /.col-md-3 -->
+
+
+
+                <div class="col-md-3 col-sm-6">
+
+                    <h4>Get the news</h4>
+
+                    <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+                    <form>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control">
+
+                            <span class="input-group-btn">
+
+                                <button class="btn btn-default" type="button">Subscribe!</button>
+
+                            </span>
+
+                        </div>
+                        <!-- /input-group -->
+                    </form>
+
+                    <hr>
+
+                    <h4>Stay in touch</h4>
+
+                    <p class="social">
+                        <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
+                    </p>
+
+
+                </div>
+                <!-- /.col-md-3 -->
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+
+    <div id="copyright">
+        <div class="container">
+            <div class="col-md-6">
+                <p class="pull-left">© 2017 Yüce Yazılım.</p>
+
+            </div>
+            <div class="col-md-6">
+                <p class="pull-right">
+                    Template by <a href="https://bootstrapious.com/e-commerce-templates">Bootstrapious.com</a>
+                    <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

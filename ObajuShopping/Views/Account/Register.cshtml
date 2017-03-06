@@ -1,0 +1,61 @@
+﻿@model ObajuShopping.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="container">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Account</a>
+            </li>
+            <li>New account/Sign in</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div class="box">
+            <h1>New account</h1>
+
+            <p class="lead">Not our registered customer yet?</p>
+            <p>With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!</p>
+            <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+
+            <hr>
+            <hr />
+            <h2></h2>
+            <hr />
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Create a new account.</h4>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Register" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
