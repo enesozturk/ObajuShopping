@@ -1,0 +1,182 @@
+﻿@using ObajuShopping.Models
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AaadbEntities11 db = new AaadbEntities11();
+}
+
+<div class="container">
+
+    <div class="col-sm-12">
+
+        <ul class="breadcrumb">
+
+            <li>
+                <a href="@Url.Action("Index","Blog")">Blog</a>
+            </li>
+            <li>
+                @Model.post.baslik
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-sm-9" id="blog-post">
+
+
+        <div class="box">
+            
+            <h1>@Model.post.baslik</h1>
+            <p class="author-date">By <a href="#">@Model.post.yazar</a> | @Model.post.tarih</p>
+            <p class="lead">This is the lead paragraph of the article. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget.</p>
+
+
+            <div class="post-content">
+                @Model.post.icerik    
+            </div>
+            
+
+        </div>
+        <!-- /#post-content -->
+
+        <div id="comments" data-animate="fadeInUp">
+            <h4>2 comments</h4>
+
+
+            <div class="row comment">
+                <div class="col-sm-3 col-md-2 text-center-xs">
+                    <p>
+                        <img src="@Url.Content("~/Content/img/")blog-avatar2.jpg" class="img-responsive img-circle" alt="">
+                    </p>
+                </div>
+                <div class="col-sm-9 col-md-10">
+                    <h5>Julie Alma</h5>
+                    <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2011 at 12:00 am</p>
+                    <p>
+                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+                    </p>
+                    <p class="reply">
+                        <a href="#"><i class="fa fa-reply"></i> Reply</a>
+                    </p>
+                </div>
+            </div>
+            <!-- /.comment -->
+
+
+            <div class="row comment last">
+
+                <div class="col-sm-3 col-md-2 text-center-xs">
+                    <p>
+                        <img src="@Url.Content("~/Content/img/")blog-avatar.jpg" class="img-responsive img-circle" alt="">
+                    </p>
+                </div>
+
+                <div class="col-sm-9 col-md-10">
+                    <h5>Louise Armero</h5>
+                    <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2012 at 12:00 am</p>
+                    <p>
+                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+                    </p>
+                    <p class="reply">
+                        <a href="#"><i class="fa fa-reply"></i> Reply</a>
+                    </p>
+                </div>
+
+            </div>
+            <!-- /.comment -->
+
+        </div>
+        <!-- /#comments -->
+
+        <div id="comment-form" data-animate="fadeInUp">
+
+            <h4>Leave comment</h4>
+
+            <form>
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Name <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="email">
+                                Email <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="comment">
+                                Comment <span class="required">*</span>
+                            </label>
+                            <textarea class="form-control" id="comment" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <button class="btn btn-primary"><i class="fa fa-comment-o"></i> Post comment</button>
+                    </div>
+                </div>
+
+
+            </form>
+
+        </div>
+        <!-- /#comment-form -->
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Blog</h3>
+            </div>
+
+            <div class="panel-body">
+
+                <ul class="nav nav-pills nav-stacked">
+                    @foreach (var post in @Model.LatestPosts)
+                    {
+                        <li>
+                            <a href="@Url.Action("Post","Blog",new {id=post.id})">@post.baslik</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.col-md-3 -->
+        <!-- *** BLOG MENU END *** -->
+
+        <div class="banner">
+            <a href="#">
+                <img src="@Url.Content("~/Content/img/")banner.jpg" alt="sales 2014" class="img-responsive">
+            </a>
+        </div>
+    </div>
+    <!-- /.box -->
+</div>
+<!-- /#blog-post -->
+
+
+
+<!-- /.container -->
