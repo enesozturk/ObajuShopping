@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ObajuShopping.Models.Product>
+@using ObajuShopping.Models;
+@{
+    ViewBag.Title = "Special";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Products</a>
+            </li>
+            <li>
+                Latests
+            </li>
+        </ul>
+    </div>
+
+    <div class="row same-height-row">
+        <div class="col-md-3 col-sm-6">
+            <div class="box same-height">
+                <h3>Our special products for you</h3>
+            </div>
+        </div>
+
+        @foreach (var latest in Model)
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="product same-height">
+                    <div class="flip-container">
+                        <div class="flipper">
+                            <div class="front">
+                                <a href="@Url.Action("Detail", "Product", new {id = latest.id})">
+                                    <img src="@Url.Content("~/Content/img/")@latest.photo" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="back">
+                                <a href="@Url.Action("Detail", "Product", new {id = latest.id})">
+                                    <img src="@Url.Content("~/Content/img/")@latest.photo" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="@Url.Action("Detail", "Product", new {id = latest.id})" class="invisible">
+                        <img src="@Url.Content("~/Content/img/")@latest.photo" alt="" class="img-responsive">
+                    </a>
+                    <div class="text">
+                        <h3>@latest.name</h3>
+                        <p class="price">$@latest.price</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

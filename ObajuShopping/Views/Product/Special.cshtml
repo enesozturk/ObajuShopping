@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ObajuShopping.Models.Product>
+@using ObajuShopping.Models
+@{
+    ViewBag.Title = "Special";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Products</a>
+            </li>
+            <li>
+                Specials
+            </li>
+        </ul>
+    </div>
+
+    <div class="row same-height-row">
+        <div class="col-md-3 col-sm-6">
+            <div class="box same-height">
+                <h3>Our special products for you</h3>
+            </div>
+        </div>
+
+        @foreach (var special in Model)
+        {
+
+            <div class="col-md-3 col-sm-6">
+                <div class="product same-height">
+                    <div class="flip-container">
+                        <div class="flipper">
+                            <div class="front">
+                                <a href="@Url.Action("Detail", "Product", new {id = special.id})">
+                                    <img src="@Url.Content("~/Content/img/")@special.photo" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="back">
+                                <a href="@Url.Action("Detail", "Product", new {id = special.id})">
+                                    <img src="@Url.Content("~/Content/img/")@special.photo" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="@Url.Action("Detail", "Product", new {id = special.id})" class="invisible">
+                        <img src="@Url.Content("~/Content/img/")@special.photo" alt="" class="img-responsive">
+                    </a>
+                    <div class="text">
+                        <h3>@special.name</h3>
+                        <p class="price">$@special.price</p>
+                    </div>
+                </div>
+                <!-- /.product -->
+            </div>
+
+        }
+
+    </div>
+</div>
