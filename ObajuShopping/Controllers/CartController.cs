@@ -16,13 +16,17 @@ namespace ObajuShopping.Controllers
 
         public ActionResult Index()
         {
-            var cart = (List<Basket>) Session["cart"];
-            
-            return View(cart);
+            BasketModel bm = new BasketModel();
+            var cart = (List<Basket>)Session["cart"];
+
+            bm.basket = cart;
+            bm.totalprice = cart.Sum(t => t.total);
+
+            return View(bm);
         }
 
         // GET: /Store/AddToCart/5
-        public ActionResult AddtoCart(int? id,int quantity)
+        public ActionResult AddtoCart(int? id, int quantity)
         {
             try
             {
@@ -34,7 +38,6 @@ namespace ObajuShopping.Controllers
                     var basket = new Basket();
 
                     basket.count = quantity;
-                    basket.discount = 14;
                     basket.resim = urun.photo;
                     basket.price = (decimal)urun.price;
                     basket.productid = urun.id;
@@ -53,7 +56,6 @@ namespace ObajuShopping.Controllers
                     {
                         var basket = new Basket();
                         basket.count = quantity;
-                        basket.discount = 0;
                         basket.resim = urun.photo;
                         basket.price = (decimal)urun.price;
                         basket.productid = urun.id;
@@ -64,7 +66,7 @@ namespace ObajuShopping.Controllers
                     else
                     {
                         isExist.price = (decimal)urun.price;
-                        isExist.total = (decimal) urun.price * quantity;
+                        isExist.total = (decimal)urun.price * quantity;
                     }
                     Session["cart"] = cart;
 
@@ -87,19 +89,33 @@ namespace ObajuShopping.Controllers
             return RedirectToAction("Index");
         }
 
-        [ChildActionOnly]
-        [Route("UpdateCart/{id}/{quantity}")]
-        public ActionResult UpdateCart(int id, int quantity)
+        //[ChildActionOnly]
+        //[Route("UpdateCart/{id}/{quantity}")]
+        //[HttpPost, ActionName("Index")]
+        [HttpPost]
+        public ActionResult UpdateCart(FormCollection formc)
         {
-            var cart = (List<Basket>) Session["cart"];
 
-            var isExist = cart.Where(p => p.productid == id).FirstOrDefault();
-            if (isExist != null)
+            string[] quantities = formc.GetValues("quantity");
+            List<Basket> cart = (List<Basket>) Session["cart"];
+            for (int i = 0; i < cart.Count; i++)
             {
-                isExist.count = quantity;
-                isExist.total = (decimal)isExist.price * quantity;
+                cart[i].count = Convert.ToInt32(quantities[i]);
+                cart[i].total = cart[i].price * Convert.ToInt32(quantities[i]);
             }
+
             Session["cart"] = cart;
+
+            //var cart = (List<Basket>)Session["cart"];
+
+            //var isExist = cart.Where(p => p.productid == ).FirstOrDefault();
+            //if (isExist != null)
+            //{
+            //    isExist.count = formc[""];
+            //    isExist.total = (decimal)isExist.price * quantity;
+            //}
+            //Session["cart"] = cart;
+
 
             return RedirectToAction("Index");
         }

@@ -1,4 +1,4 @@
-﻿@model List<ObajuShopping.Basket>
+﻿@model ObajuShopping.BasketModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,7 +25,8 @@
 
         <div class="box">
 
-            <form method="post" action="checkout1.html">
+            @using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post))
+            {
 
                 <h1>Shopping cart</h1>
                 <p class="text-muted">You currently have 3 item(s) in your cart.</p>
@@ -35,14 +36,14 @@
                             <tr>
                                 <th colspan="2">Product</th>
                                 <th>Quantity</th>
+
                                 <th>Unit price</th>
                                 <th>Discount</th>
                                 <th colspan="2">Total</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            @foreach (Basket item in (List<Basket>)Session["cart"])
+                            @foreach (var item in Model.basket)
                             {
                                 <tr>
                                     <td>
@@ -54,44 +55,42 @@
                                         <a href="#">@item.productname</a>
                                     </td>
                                     <td>
-                                        <input type="number" value="@item.count" class="form-control qua">
+                                        <input type="number" value="@item.count" name="quantity" />
+                                        @Html.HiddenFor(h => item.productid, new { Name = "productid" })
+
                                     </td>
                                     <td>$@item.price</td>
-                                    <td>@item.discount</td>
+                                    <td>0</td>
                                     <td>@item.total</td>
                                     <td>
-                                        <a href="@Url.Action("Delete","Cart",new {id=item.productid})"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                    <td>
-                                        <a href="javacript:void(0);" onclick="return updatebasket(this,@item.productid);"><i class="fa fa-trash-o"></i></a>
-                                        @*<a href="@Url.Action("UpdateCart","Cart",new {id=item.productid,quantity=})"><i class="fa fa-trash-o"></i></a>*@
+                                        <a href="@Url.Action("Delete","Cart",new {id=item.productid,})"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             }
                         </tbody>
                         <tfoot>
-                            <tr>
+                            @*<tr>
                                 <th colspan="5">Total</th>
                                 <th colspan="2"></th>
-                            </tr>
+                            </tr>*@
                         </tfoot>
                     </table>
                 </div>
-                <!-- /.table-responsive -->
+
                 <div class="box-footer">
                     <div class="pull-left">
                         <a href="category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button>
-                        <button type="submit" class="btn btn-primary">
-                            Proceed to checkout <i class="fa fa-chevron-right"></i>
-                        </button>
+                        <input type="submit" class="btn btn-default" value="Update" />
+                        @*<button type="submit" class="btn btn-primary">
+                                Proceed to checkout <i class="fa fa-chevron-right"></i>
+                            </button>*@
                     </div>
                 </div>
-            </form>
+            }
+
         </div>
-        <!-- /.box -->
 
         <div class="row same-height-row">
             <div class="col-md-3 col-sm-6">
@@ -124,7 +123,6 @@
                         <p class="price">$143</p>
                     </div>
                 </div>
-                <!-- /.product -->
             </div>
 
             <div class="col-md-3 col-sm-6">
@@ -151,9 +149,8 @@
                         <p class="price">$143</p>
                     </div>
                 </div>
-                <!-- /.product -->
-            </div>
 
+            </div>
 
             <div class="col-md-3 col-sm-6">
                 <div class="product same-height">
@@ -180,16 +177,16 @@
 
                     </div>
                 </div>
-                <!-- /.product -->
+
             </div>
 
         </div>
 
 
     </div>
-    <!-- /.col-md-9 -->
 
     <div class="col-md-3">
+
         <div class="box" id="order-summary">
             <div class="box-header">
                 <h3>Order summary</h3>
@@ -201,11 +198,11 @@
                     <tbody>
                         <tr>
                             <td>Order subtotal</td>
-                            <th>$446.00</th>
+                            <th>$0.00</th>
                         </tr>
                         <tr>
                             <td>Shipping and handling</td>
-                            <th>$10.00</th>
+                            <th>$0.00</th>
                         </tr>
                         <tr>
                             <td>Tax</td>
@@ -213,7 +210,7 @@
                         </tr>
                         <tr class="total">
                             <td>Total</td>
-                            <th>$456.00</th>
+                            <th>@Model.totalprice</th>
                         </tr>
                     </tbody>
                 </table>
@@ -238,23 +235,10 @@
 
                     </span>
                 </div>
-                <!-- /input-group -->
+
             </form>
         </div>
 
     </div>
-    <!-- /.col-md-3 -->
 
 </div>
-<!-- /.container -->
-<script>
-    //function updatebasket(elem, productid) {
-    //    window.location = "/Cart/UpdateBasket/" + productid + "/" + $(elem).closest("tr").find(".qua").val();
-    //}
-    var qua = $(".qua").val;
-    
-      function updatebasket(elem,id) {
-          window.location.href = '@Url.Action("UpdateCart", "Cart")/' + id+ "/" + $(elem).closest("tr").find(".qua").val();
-      }
-     //var myUrl = window.location.href = 'Cart/UpdateBasket/' + id+ '/'+qua;
-</script>
