@@ -21,6 +21,7 @@ namespace ObajuShopping.Controllers
 
             bm.basket = cart;
             bm.totalprice = cart.Sum(t => t.total);
+            bm.productCount = cart.Count;
 
             return View(bm);
         }
@@ -36,13 +37,14 @@ namespace ObajuShopping.Controllers
                 {
                     List<Basket> cart = new List<Basket>();
                     var basket = new Basket();
-
-                    basket.count = quantity;
+                    basket.productCount++;
+                    basket.quantity = quantity;
                     basket.resim = urun.photo;
                     basket.price = (decimal)urun.price;
-                    basket.productid = urun.id;
-                    basket.productname = urun.name;
+                    basket.productId = urun.id;
+                    basket.productName = urun.name;
                     basket.total = (decimal)urun.price * quantity;
+                    
                     cart.Add(basket);
 
                     Session["cart"] = cart;
@@ -50,23 +52,26 @@ namespace ObajuShopping.Controllers
                 else
                 {
                     var cart = (List<Basket>)Session["cart"];
-                    var isExist = cart.Where(p => p.productid == id).FirstOrDefault();
+                    var isExist = cart.Where(p => p.productId == id).FirstOrDefault();
 
                     if (isExist == null)
                     {
                         var basket = new Basket();
-                        basket.count = quantity;
+                        basket.productCount = 0;
+                        basket.quantity = quantity;
                         basket.resim = urun.photo;
                         basket.price = (decimal)urun.price;
-                        basket.productid = urun.id;
-                        basket.productname = urun.name;
+                        basket.productId = urun.id;
+                        basket.productName = urun.name;
                         basket.total = (decimal)urun.price * quantity;
+                        basket.productCount++;
                         cart.Add(basket);
                     }
                     else
                     {
                         isExist.price = (decimal)urun.price;
-                        isExist.total = (decimal)urun.price * quantity;
+                        isExist.quantity++;
+                        isExist.total = (decimal)urun.price * isExist.quantity;
                     }
                     Session["cart"] = cart;
 
@@ -83,7 +88,8 @@ namespace ObajuShopping.Controllers
         public ActionResult Delete(int id)
         {
             var cart = (List<Basket>)Session["cart"];
-            var removedItem = cart.First(p => p.productid == id);
+            var removedItem = cart.First(p => p.productId == id);
+            removedItem.productCount--;
             cart.Remove(removedItem);
             Session["cart"] = cart;
             return RedirectToAction("Index");
@@ -100,22 +106,18 @@ namespace ObajuShopping.Controllers
             List<Basket> cart = (List<Basket>) Session["cart"];
             for (int i = 0; i < cart.Count; i++)
             {
-                cart[i].count = Convert.ToInt32(quantities[i]);
-                cart[i].total = cart[i].price * Convert.ToInt32(quantities[i]);
+                if (cart[i].quantity == 0)
+                {
+                    cart.Remove(cart[i]);
+                }
+                else
+                {
+                    cart[i].quantity = Convert.ToInt32(quantities[i]);
+                    cart[i].total = cart[i].price * Convert.ToInt32(quantities[i]);
+                }
             }
 
             Session["cart"] = cart;
-
-            //var cart = (List<Basket>)Session["cart"];
-
-            //var isExist = cart.Where(p => p.productid == ).FirstOrDefault();
-            //if (isExist != null)
-            //{
-            //    isExist.count = formc[""];
-            //    isExist.total = (decimal)isExist.price * quantity;
-            //}
-            //Session["cart"] = cart;
-
 
             return RedirectToAction("Index");
         }

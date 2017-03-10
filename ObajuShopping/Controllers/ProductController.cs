@@ -17,7 +17,6 @@ namespace Obaju.Controllers
     public class ProductController : Controller
     {
         AaadbEntities db = new AaadbEntities();
-        //private ProductViewModel _pvm = new ProductViewModel();
         ProductViewModel pvm = new ProductViewModel();
 
         // GET: Product
@@ -29,7 +28,6 @@ namespace Obaju.Controllers
         {
             return View();
         }
-
         public ActionResult Latest()
         {
             var latestProducts = pvm.LatestProducts();
@@ -42,10 +40,11 @@ namespace Obaju.Controllers
         }
         public ActionResult Detail(int id)
         {
-            Product product = db.Products.Find(id);
-            ViewBag.relatedProducts = pvm.RelatedProducts(product, 4);
+            ProductViewModel pvm = new ProductViewModel();
+            pvm.RelatedProducts(id);
+            pvm.Product = db.Products.Find(id);
 
-            return View(product);
+            return View(pvm);
         }
     }
 }

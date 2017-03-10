@@ -1,4 +1,4 @@
-﻿@model ObajuShopping.Models.Product
+﻿@model ObajuShopping.ViewModels.ProductViewModel
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,7 +13,7 @@
                 <a href="#">Products</a>
             </li>
             <li>
-                <a href="#">@Model.name</a>
+                <a href="#">@Model.Product.name</a>
             </li>
         </ul>
 
@@ -184,7 +184,7 @@
         <div class="row" id="productMain">
             <div class="col-sm-6">
                 <div id="mainImage">
-                    <img src="@Url.Content("~/Content/img/")@Model.photo" alt="" class="img-responsive">
+                    <img src="@Url.Content("~/Content/img/")@Model.Product.photo" alt="" class="img-responsive">
                 </div>
 
                 <div class="ribbon sale">
@@ -202,14 +202,14 @@
             </div>
             <div class="col-sm-6">
                 <div class="box">
-                    <h1 class="text-center">@Model.name</h1>
+                    <h1 class="text-center">@Model.Product.name</h1>
                     <p class="goToDescription">
                         <a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
                     </p>
-                    <p class="price">@Model.price</p>
+                    <p class="price">@Model.Product.price</p>
 
                     <p class="text-center buttons">
-                        <a href="@Url.Action("AddToCart","Cart",new {id = Model.id},null)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                        <a href="@Url.Action("AddToCart","Cart",new {id = Model.Product.id, quantity = 1},null)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                         <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
                     </p>
 
@@ -218,13 +218,13 @@
 
                 <div class="row" id="thumbs">
                     <div class="col-xs-4">
-                        <a href="@Url.Content("~/Content/img/")@Model.photo" class="thumb">
-                            <img src="@Url.Content("~/Content/img/")@Model.photo" alt="" class="img-responsive">
+                        <a href="@Url.Content("~/Content/img/")@Model.Product.photo" class="thumb">
+                            <img src="@Url.Content("~/Content/img/")@Model.Product.photo" alt="" class="img-responsive">
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="@Url.Content("~/Content/img/")@Model.photo" class="thumb">
-                            <img src="@Url.Content("~/Content/img/")@Model.photo" alt="" class="img-responsive">
+                        <a href="@Url.Content("~/Content/img/")@Model.Product.photo" class="thumb">
+                            <img src="@Url.Content("~/Content/img/")@Model.Product.photo" alt="" class="img-responsive">
                         </a>
                     </div>
                 </div>
@@ -273,7 +273,7 @@
                 </div>
             </div>
 
-            @foreach (var rps in ViewBag.relatedProducts)
+            @foreach (var rps in Model.RelatedProducts(Model.Product.id))
             {
                 
                 <div class="col-md-3 col-sm-6">
@@ -281,23 +281,23 @@
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front">
-                                    <a href="@Url.Action("Detail","Product",new {id=rps.id})">
-                                        <img src="@Url.Content("~/Content/img/")@rps.photo" alt="" class="img-responsive">
+                                    <a href="@Url.Action("Detail","Product",new {id=rps.productId})">
+                                        <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="back">
                                     <a href="@Url.Action("Detail","Product",new {id=rps.id})">
-                                        <img src="@Url.Content("~/Content/img/")@rps.photo" alt="" class="img-responsive">
+                                        <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <a href="@Url.Action("Detail","Product",new {id=rps.id})" class="invisible">
-                            <img src="@Url.Content("~/Content/img/")@rps.photo" alt="" class="img-responsive">
+                            <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
                         </a>
                         <div class="text">
-                            <h3>@rps.name</h3>
-                            <p class="price">$@rps.price</p>
+                            <h3>@rps.Product.name</h3>
+                            <p class="price">$@rps.Product.price</p>
                         </div>
                     </div>
                 </div>
@@ -312,7 +312,6 @@
                         <h3>Products viewed recently</h3>
                     </div>
                 </div>
-
 
                 <div class="col-md-3 col-sm-6">
                     <div class="product same-height">

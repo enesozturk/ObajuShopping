@@ -10,13 +10,13 @@ namespace ObajuShopping.Controllers
     public class MasterController : Controller
     {
         AaadbEntities db = new AaadbEntities();
-        public List<Category> menCategories()
+        public List<Category> menClothing()
         {
-            return db.Categories.ToList();
+            return db.Categories.Where(p => p.topCategory == 2).ToList();
         }
         public PartialViewResult _navbarCategories()
         {
-            var model = menCategories();
+            var model = menClothing();
             return PartialView(model);
         }
     }

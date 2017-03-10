@@ -1,4 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using ObajuShopping
+@{
+    var cart = (List<Basket>)Session["cart"];
+    BasketModel bm = new BasketModel();
+    if (cart == null)
+    {
+        bm.productCount = 0;
+    }
+    else
+    {
+        bm.productCount = cart.Count;
+    }
+
+
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -58,7 +73,7 @@
                         <i class="fa fa-search"></i>
                     </button>
                     <a class="btn btn-default navbar-toggle" href="@Url.Action("Index", "Cart")">
-                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">3 items in cart</span>
+                        <i class="fa fa-shopping-cart"></i> <span class="hidden-xs">@bm.productCount item(s) in cart</span>
                     </a>
                 </div>
             </div>
@@ -176,7 +191,7 @@
                                             <h5>Clothing</h5>
                                             <ul>
                                                 @{
-                                                    Html.RenderAction("_navbarCategories","Master");
+                                                    Html.RenderAction("_navbarCategories", "Master");
                                                 }
                                             </ul>
                                         </div>
@@ -345,7 +360,7 @@
             <div class="navbar-buttons">
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
-                    <a href="@Url.Action("Index", "Cart")" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                    <a href="@Url.Action("Index", "Cart")" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">@bm.productCount item(s) in cart</span></a>
                 </div>
                 <!--/.nav-collapse -->
 
