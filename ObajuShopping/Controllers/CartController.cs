@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ObajuShopping.Interfaces;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 
@@ -11,87 +12,38 @@ namespace ObajuShopping.Controllers
 {
     public class CartController : Controller
     {
+        private readonly ICartService _cartService;
+
+        public CartController()
+        {
+            
+        }
+        public CartController(ICartService cartService)
+        {
+            _cartService = cartService;
+        }
 
         AaadbEntities db = new AaadbEntities();
 
         public ActionResult Index()
         {
-            BasketModel bm = new BasketModel();
-            var cart = (List<Basket>)Session["cart"];
+            var bms = _cartService.basketmodel();
 
-            bm.basket = cart;
-            bm.totalprice = cart.Sum(t => t.total);
-            bm.productCount = cart.Count;
+            return View(bms);
 
-            return View(bm);
         }
 
         // GET: /Store/AddToCart/5
         public ActionResult AddtoCart(int? id, int quantity)
         {
-            try
-            {
-                var urun = db.Products.Find(id);
+            _cartService.AddToCart(id,quantity);
 
-                if (Session["cart"] == null) // cart session'u yoksa list turunden session olustur
-                {
-                    List<Basket> cart = new List<Basket>();
-                    var basket = new Basket();
-                    basket.productCount++;
-                    basket.quantity = quantity;
-                    basket.resim = urun.photo;
-                    basket.price = (decimal)urun.price;
-                    basket.productId = urun.id;
-                    basket.productName = urun.name;
-                    basket.total = (decimal)urun.price * quantity;
-                    
-                    cart.Add(basket);
-
-                    Session["cart"] = cart;
-                }
-                else
-                {
-                    var cart = (List<Basket>)Session["cart"];
-                    var isExist = cart.Where(p => p.productId == id).FirstOrDefault();
-
-                    if (isExist == null)
-                    {
-                        var basket = new Basket();
-                        basket.productCount = 0;
-                        basket.quantity = quantity;
-                        basket.resim = urun.photo;
-                        basket.price = (decimal)urun.price;
-                        basket.productId = urun.id;
-                        basket.productName = urun.name;
-                        basket.total = (decimal)urun.price * quantity;
-                        basket.productCount++;
-                        cart.Add(basket);
-                    }
-                    else
-                    {
-                        isExist.price = (decimal)urun.price;
-                        isExist.quantity++;
-                        isExist.total = (decimal)urun.price * isExist.quantity;
-                    }
-                    Session["cart"] = cart;
-
-                }
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            var cart = (List<Basket>)Session["cart"];
-            var removedItem = cart.First(p => p.productId == id);
-            removedItem.productCount--;
-            cart.Remove(removedItem);
-            Session["cart"] = cart;
+            _cartService.DeleteItemFromCart(id);
             return RedirectToAction("Index");
         }
 
