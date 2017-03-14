@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 using FormCollection = Microsoft.Owin.FormCollection;
 
 namespace ObajuShopping.Interfaces
 {
-    public class CartService : ICartService
+    public class CartVisitor : ICartService
     {
         AaadbEntities db = new AaadbEntities();
         public BasketModel basketmodel()
@@ -26,6 +28,7 @@ namespace ObajuShopping.Interfaces
             };
 
             return bm;
+
         }
 
         public void AddToCart(int? id, int quantity)
@@ -53,6 +56,7 @@ namespace ObajuShopping.Interfaces
                 else
                 {
                     var cart = (List<Basket>)HttpContext.Current.Session["cart"];
+
                     var isExist = cart.Where(p => p.productId == id).FirstOrDefault();
 
                     if (isExist == null)
@@ -96,7 +100,7 @@ namespace ObajuShopping.Interfaces
 
         public void UpdateCart(FormCollection formc)
         {
-            string[] quantities = (string[]) formc.GetValues("quantity");
+            string[] quantities = (string[])formc.GetValues("quantity");
             List<Basket> cart = (List<Basket>)HttpContext.Current.Session["cart"];
             for (int i = 0; i < cart.Count; i++)
             {

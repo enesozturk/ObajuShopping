@@ -7,26 +7,23 @@ using ObajuShopping.Interfaces;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 
-
 namespace ObajuShopping.Controllers
 {
-    public class CartController : Controller
+    public class CartController : AppManager
     {
-        private readonly ICartService _cartService;
+      
+    
 
         public CartController()
         {
-            
-        }
-        public CartController(ICartService cartService)
-        {
-            _cartService = cartService;
+           
         }
 
         AaadbEntities db = new AaadbEntities();
 
         public ActionResult Index()
         {
+
             var bms = _cartService.basketmodel();
 
             return View(bms);
@@ -36,6 +33,7 @@ namespace ObajuShopping.Controllers
         // GET: /Store/AddToCart/5
         public ActionResult AddtoCart(int? id, int quantity)
         {
+
             _cartService.AddToCart(id,quantity);
 
             return RedirectToAction("Index");
