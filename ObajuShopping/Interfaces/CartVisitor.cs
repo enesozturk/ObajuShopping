@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
-using FormCollection = Microsoft.Owin.FormCollection;
 
 namespace ObajuShopping.Interfaces
 {
@@ -30,7 +29,10 @@ namespace ObajuShopping.Interfaces
             return bm;
 
         }
+        public CartVisitor()
+        {
 
+        }
         public void AddToCart(int? id, int quantity)
         {
             try
@@ -98,7 +100,8 @@ namespace ObajuShopping.Interfaces
             HttpContext.Current.Session["cart"] = cart;
         }
 
-        public void UpdateCart(FormCollection formc)
+        //[System.Web.Mvc.AllowAnonymous]
+        public void UpdateCart(System.Web.Mvc.FormCollection formc)
         {
             string[] quantities = (string[])formc.GetValues("quantity");
             List<Basket> cart = (List<Basket>)HttpContext.Current.Session["cart"];

@@ -13,14 +13,13 @@ namespace ObajuShopping.Models
     public class CartMember : ICartService
     {
         static AaadbEntities db = new AaadbEntities();
-
+       
         static string currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
         AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
-        BasketModel bm = new BasketModel();
 
         public BasketModel basketmodel()
         {
-
+            BasketModel bm = new BasketModel();
             var cart =
                     db.Carts.Where(c => c.memberId == currentUserId)
                         .Select(s => new Basket
@@ -48,6 +47,7 @@ namespace ObajuShopping.Models
             yeniSepet.memberId = currentUserId;
             yeniSepet.productId = urun.id;
             yeniSepet.price = (decimal)urun.price;
+            yeniSepet.productCount++;
             yeniSepet.quantity = quantity;
             yeniSepet.total = (decimal)urun.price * quantity;
 
@@ -63,11 +63,12 @@ namespace ObajuShopping.Models
             db.SaveChanges();
         }
 
-        public void UpdateCart(FormCollection formc)
+        [System.Web.Mvc.AllowAnonymous]
+        public void UpdateCart(System.Web.Mvc.FormCollection formc)
         {
-            string[] quantities = (string[]) formc.GetValues("quantity");
-            
-            var cart = db.Carts.Where(c => c.memberId== currentUserId).ToList();
+            string[] quantities = (string[])formc.GetValues("quantity");
+
+            var cart = db.Carts.Where(c => c.memberId == currentUserId).ToList();
             for (int i = 0; i < cart.Count; i++)
             {
                 if (cart[i].quantity == 0)

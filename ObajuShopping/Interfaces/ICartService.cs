@@ -12,6 +12,6 @@ namespace ObajuShopping.Interfaces
         BasketModel basketmodel();
         void AddToCart(int? id, int quantity);
         void DeleteItemFromCart(int id);
-        void UpdateCart(FormCollection formc);
+        void UpdateCart(System.Web.Mvc.FormCollection formc);
     }
 }
