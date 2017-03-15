@@ -8,11 +8,12 @@ namespace ObajuShopping
     [Serializable]
     public class Basket
     {
-        public int productid { get; set; }
+        public int productId { get; set; }
         public string resim { get; set; }
-        public string productname { get; set; }
+        public string productName { get; set; }
         public decimal price { get; set; }
         public decimal total { get; set; }
-        public int count { get; set; }
+        public int quantity { get; set; }
+        public int productCount { get; set; }
     }
 }

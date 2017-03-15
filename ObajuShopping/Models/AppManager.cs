@@ -9,7 +9,7 @@ using ObajuShopping.Interfaces;
 
 namespace ObajuShopping.Models
 {
-    public class AppManager: Controller
+    public class AppManager : Controller
     {
         public ICartService _cartService = new CartVisitor();
 
@@ -21,12 +21,12 @@ namespace ObajuShopping.Models
         void control()
         {
 
-            if (System.Web.HttpContext.Current.User!=null)
+            if (System.Web.HttpContext.Current.User != null)
             {
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true)
                 {
                     _cartService = new CartMember();
-                } 
+                }
             }
         }
     }

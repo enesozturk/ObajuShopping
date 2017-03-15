@@ -13,7 +13,7 @@ namespace ObajuShopping.Models
     public class CartMember : ICartService
     {
         static AaadbEntities db = new AaadbEntities();
-       
+
         static string currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
         AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
 
@@ -43,17 +43,49 @@ namespace ObajuShopping.Models
         {
             var urun = db.Products.Find(id);
 
-            Cart yeniSepet = new Cart();
-            yeniSepet.memberId = currentUserId;
-            yeniSepet.productId = urun.id;
-            yeniSepet.price = (decimal)urun.price;
-            yeniSepet.productCount++;
-            yeniSepet.quantity = quantity;
-            yeniSepet.total = (decimal)urun.price * quantity;
+            var cart = db.Carts.Where(c => c.Product.id == id).ToList();
 
-            db.Carts.Add(yeniSepet);
+            if (cart == null)
+            {
+                List<Cart> cart1 = new List<Cart>();
+
+                var yeniSatir = new Cart();
+
+                yeniSatir.memberId = currentUserId;
+                yeniSatir.productId = urun.id;
+                yeniSatir.price = (decimal)urun.price;
+                yeniSatir.productCount++;
+                yeniSatir.quantity = quantity;
+                yeniSatir.total = (decimal)urun.price * quantity;
+
+                db.Carts.Add(yeniSatir);
+            }
+            else
+            {
+                var isExist = cart.Where(p => p.productId == id).FirstOrDefault(); //kartın içinde var
+
+                if (isExist == null) //yoksa
+                {
+                    Cart yeniSatir = new Cart();
+
+                    yeniSatir.memberId = currentUserId;
+                    yeniSatir.productId = urun.id;
+                    yeniSatir.price = (decimal)urun.price;
+                    yeniSatir.productCount++;
+                    yeniSatir.quantity = quantity;
+                    yeniSatir.total = (decimal)urun.price * quantity;
+
+                    db.Carts.Add(yeniSatir);
+                }
+                else
+                {
+                    isExist.price = (decimal)urun.price;
+                    isExist.quantity++;
+                    isExist.total = (decimal)urun.price * isExist.quantity;
+
+                }
+            }
             db.SaveChanges();
-
         }
 
         public void DeleteItemFromCart(int id)
@@ -71,9 +103,11 @@ namespace ObajuShopping.Models
             var cart = db.Carts.Where(c => c.memberId == currentUserId).ToList();
             for (int i = 0; i < cart.Count; i++)
             {
+                cart[i].quantity = Convert.ToInt32(quantities[i]);
+                db.SaveChanges();
                 if (cart[i].quantity == 0)
                 {
-                    cart.Remove(cart[i]);
+                    db.Carts.Remove(cart[i]);
                 }
                 else
                 {

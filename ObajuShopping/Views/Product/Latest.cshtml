@@ -47,6 +47,9 @@
                     </a>
                     <div class="text">
                         <h3>@latest.name</h3>
+                        <p class="text-center buttons">
+                            <a href="@Url.Action("AddToCart","Cart",new {id= latest.id, quantity = 1})" class="btn btn-primary">Add to Cart</a>
+                        </p>
                         <p class="price">$@latest.price</p>
                     </div>
                 </div>

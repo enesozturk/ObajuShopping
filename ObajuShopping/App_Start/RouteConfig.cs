@@ -13,11 +13,20 @@ namespace ObajuShopping
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
+            routes.MapRoute(
+               name: "updatebasket",
+               url: "{controller}/{action}/{id}/{quantity}",
+               defaults: new { controller = "Cart", action = "UpdateBasket", id = UrlParameter.Optional, quantity = "" }
+           );
+
         }
     }
 }

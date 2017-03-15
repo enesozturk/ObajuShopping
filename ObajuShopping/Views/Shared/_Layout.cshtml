@@ -1,17 +1,29 @@
 ﻿@using ObajuShopping
+@using ObajuShopping.Models;
+@using Microsoft.AspNet.Identity
 @{
-    var cart = (List<Basket>)Session["cart"];
+    AaadbEntities db = new AaadbEntities();
     BasketModel bm = new BasketModel();
-    if (cart == null)
+    if (Request.IsAuthenticated)
     {
-        bm.productCount = 0;
+        var user = System.Web.HttpContext.Current.User.Identity.GetUserId();
+        var cart = db.Carts.Where(p => p.memberId == user).ToList();
+        if (cart == null) { bm.productCount = 0; }
+        else { bm.productCount = cart.Count; }
     }
     else
     {
-        bm.productCount = cart.Count;
+        var cart = (List<Basket>)Session["cart"];
+
+        if (cart == null)
+        {
+            bm.productCount = 0;
+        }
+        else
+        {
+            bm.productCount = cart.Count;
+        }
     }
-
-
 }
 <!DOCTYPE html>
 <html>
@@ -38,7 +50,6 @@
     <link href="@Url.Content("~/Content/style.default.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/custom.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/owl.transitions.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/style.blue.css")" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/respond.min.js"></script>
 
 </head>

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ObajuShopping.Interfaces;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 using ProductViewModel = ObajuShopping.ViewModels.ProductViewModel;
@@ -18,6 +19,16 @@ namespace Obaju.Controllers
     {
         AaadbEntities db = new AaadbEntities();
         ProductViewModel pvm = new ProductViewModel();
+
+        private readonly ICartService _cartService;
+        public ProductController()
+        {
+
+        }
+        public ProductController(ICartService cartService)
+        {
+            _cartService = cartService;
+        }
 
         // GET: Product
         public ActionResult Index()

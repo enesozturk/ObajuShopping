@@ -22,7 +22,7 @@ namespace ObajuShopping.Interfaces
             var bm = new BasketModel()
             {
                 basket = cart,
-                totalprice = cart.Sum(t => t.price),
+                totalprice = cart.Sum(t => t.total),
                 productCount = cart.Count
             };
 
@@ -107,6 +107,8 @@ namespace ObajuShopping.Interfaces
             List<Basket> cart = (List<Basket>)HttpContext.Current.Session["cart"];
             for (int i = 0; i < cart.Count; i++)
             {
+                cart[i].quantity = Convert.ToInt32(quantities[i]);
+
                 if (cart[i].quantity == 0)
                 {
                     cart.Remove(cart[i]);

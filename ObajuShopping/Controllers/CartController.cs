@@ -9,24 +9,18 @@ using ObajuShopping.ViewModels;
 
 namespace ObajuShopping.Controllers
 {
-    public class CartController : Controller
+    public class CartController : AppManager
     {
-        ICartService _cartService = new CartVisitor();
+        //ICartService _cartService = new CartVisitor();
         AaadbEntities db = new AaadbEntities();
         public CartController()
         {
-            if (System.Web.HttpContext.Current.User != null)
-            {
-                if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true)
-                {
-                    _cartService = new CartMember();
-                }
-            }
+           
         }
         public ActionResult Index()
         {
             var bms = _cartService.basketmodel();
-
+            ViewBag.productCounts = bms.productCount;
             return View(bms);
         }
 

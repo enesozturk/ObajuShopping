@@ -8,7 +8,7 @@ using ObajuShopping.ViewModels;
 
 namespace Obaju.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class BlogController : Controller
     {
         AaadbEntities db = new AaadbEntities();

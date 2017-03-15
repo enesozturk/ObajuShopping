@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f7c8fc0f714413b924ffbd679a017ec" Name="Diagram1">
+        <EntityTypeShape EntityType="AaadbModel.Blog" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.Cart" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.Category" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.Option" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.OptionGroup" Width="1.5" PointX="1.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.Order" Width="1.5" PointX="3.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.OrderDetail" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.Product" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.Product_CatgoryRel" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.ProductOption" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AaadbModel.Slider" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="AaadbModel.FK_Cart_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="AaadbModel.FK_Product_CatgoryRel_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="AaadbModel.FK_Option_OptionGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="AaadbModel.FK_ProductOptions_Option" ManuallyRouted="false" />
+        <AssociationConnector Association="AaadbModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="AaadbModel.FK_OrdersDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="AaadbModel.FK_Product_CatgoryRel_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="AaadbModel.FK_ProductOptions_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AaadbModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="17.75" />
+        <EntityTypeShape EntityType="AaadbModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="20.375" />
+        <EntityTypeShape EntityType="AaadbModel.AspNetUserRole" Width="1.5" PointX="3" PointY="15.375" />
+        <EntityTypeShape EntityType="AaadbModel.AspNetUser" Width="1.5" PointX="0.75" PointY="11.625" />
+        <AssociationConnector Association="AaadbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AaadbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AaadbModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AaadbModel.FK_Cart_AspNetUsers" />
+        <AssociationConnector Association="AaadbModel.FK_Order_AspNetUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
