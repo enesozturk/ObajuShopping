@@ -14,8 +14,12 @@ namespace ObajuShopping.Models
     {
         static AaadbEntities db = new AaadbEntities();
 
-        static string currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-        AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
+        static string currentUserId;
+        public CartMember()
+        {
+            
+        }
+        //AspNetUser currentUser = db.AspNetUsers.First(x => x.Id == currentUserId);
 
         public BasketModel basketmodel()
         {
@@ -32,6 +36,7 @@ namespace ObajuShopping.Models
                             productName = s.Product.name
                         })
                         .ToList();
+
             bm.basket = cart;
             bm.totalprice = cart.Sum(t => t.total);
             bm.productCount = cart.Count;
@@ -54,7 +59,6 @@ namespace ObajuShopping.Models
                 yeniSatir.memberId = currentUserId;
                 yeniSatir.productId = urun.id;
                 yeniSatir.price = (decimal)urun.price;
-                yeniSatir.productCount++;
                 yeniSatir.quantity = quantity;
                 yeniSatir.total = (decimal)urun.price * quantity;
 
@@ -71,7 +75,6 @@ namespace ObajuShopping.Models
                     yeniSatir.memberId = currentUserId;
                     yeniSatir.productId = urun.id;
                     yeniSatir.price = (decimal)urun.price;
-                    yeniSatir.productCount++;
                     yeniSatir.quantity = quantity;
                     yeniSatir.total = (decimal)urun.price * quantity;
 

@@ -27,8 +27,8 @@ namespace ObajuShopping.Models
         public string orderTrackingNumber { get; set; }
         public bool status { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

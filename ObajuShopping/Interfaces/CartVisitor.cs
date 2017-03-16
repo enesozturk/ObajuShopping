@@ -14,23 +14,31 @@ namespace ObajuShopping.Interfaces
 {
     public class CartVisitor : ICartService
     {
+
         AaadbEntities db = new AaadbEntities();
+
         public BasketModel basketmodel()
         {
-            var cart = (List<Basket>)HttpContext.Current.Session["cart"];
+            BasketModel bm = new BasketModel();
 
-            var bm = new BasketModel()
+            var cart = (List<Basket>)HttpContext.Current.Session["cart"];
+            List<Basket> lm = new List<Basket>(); //If there is no product in cart this object will show empty cart.
+            if (cart != null)
             {
-                basket = cart,
-                totalprice = cart.Sum(t => t.total),
-                productCount = cart.Count
-            };
+                if(cart.Count == 0)
+                {
+                    
+                }
+                bm.basket = cart;
+                bm.totalprice = cart.Sum(t => t.total);
+                bm.productCount = cart.Count;
+            }
+            else
+            {
+                bm.basket = lm;
+            }
 
             return bm;
-
-        }
-        public CartVisitor()
-        {
 
         }
         public void AddToCart(int? id, int quantity)
@@ -43,7 +51,6 @@ namespace ObajuShopping.Interfaces
                 {
                     List<Basket> cart = new List<Basket>();
                     var basket = new Basket();
-                    basket.productCount++;
                     basket.quantity = quantity;
                     basket.resim = urun.photo;
                     basket.price = (decimal)urun.price;
@@ -64,14 +71,12 @@ namespace ObajuShopping.Interfaces
                     if (isExist == null)
                     {
                         var basket = new Basket();
-                        basket.productCount = 0;
                         basket.quantity = quantity;
                         basket.resim = urun.photo;
                         basket.price = (decimal)urun.price;
                         basket.productId = urun.id;
                         basket.productName = urun.name;
                         basket.total = (decimal)urun.price * quantity;
-                        basket.productCount++;
                         cart.Add(basket);
                     }
                     else
@@ -95,7 +100,6 @@ namespace ObajuShopping.Interfaces
         {
             var cart = (List<Basket>)HttpContext.Current.Session["cart"];
             var removedItem = cart.First(p => p.productId == id);
-            removedItem.productCount--;
             cart.Remove(removedItem);
             HttpContext.Current.Session["cart"] = cart;
         }

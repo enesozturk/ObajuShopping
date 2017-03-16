@@ -25,6 +25,10 @@ namespace ObajuShopping.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
@@ -36,9 +40,5 @@ namespace ObajuShopping.Models
         public virtual DbSet<Product_CatgoryRel> Product_CatgoryRel { get; set; }
         public virtual DbSet<ProductOption> ProductOptions { get; set; }
         public virtual DbSet<Slider> Sliders { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

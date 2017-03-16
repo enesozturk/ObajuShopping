@@ -17,12 +17,11 @@ namespace ObajuShopping.Models
         public int id { get; set; }
         public int productId { get; set; }
         public string memberId { get; set; }
-        public Nullable<int> productCount { get; set; }
         public decimal price { get; set; }
         public decimal total { get; set; }
         public int quantity { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

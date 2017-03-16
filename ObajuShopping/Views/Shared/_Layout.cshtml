@@ -6,10 +6,24 @@
     BasketModel bm = new BasketModel();
     if (Request.IsAuthenticated)
     {
-        var user = System.Web.HttpContext.Current.User.Identity.GetUserId();
-        var cart = db.Carts.Where(p => p.memberId == user).ToList();
+        string user = System.Web.HttpContext.Current.User.Identity.GetUserId();
+
+        var cart =
+                    db.Carts.Where(c => c.memberId == user)
+                        .Select(s => new Basket
+                        {
+                            productId = s.productId,
+                            resim = s.Product.photo,
+                            price = s.price,
+                            total = s.total,
+                            quantity = s.quantity,
+                            productName = s.Product.name
+                        })
+                        .ToList();
+        bm.basket = cart;
+        bm.productCount = cart.Count();
         if (cart == null) { bm.productCount = 0; }
-        else { bm.productCount = cart.Count; }
+        else { bm.productCount = cart.Count(); }
     }
     else
     {

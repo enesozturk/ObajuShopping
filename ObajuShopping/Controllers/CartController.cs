@@ -3,19 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ObajuShopping.Interfaces;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 
 namespace ObajuShopping.Controllers
 {
-    public class CartController : AppManager
+    public class CartController : Controller
     {
-        //ICartService _cartService = new CartVisitor();
         AaadbEntities db = new AaadbEntities();
+        public ICartService _cartService = new CartVisitor();
+
+        //static string currentUserId;
         public CartController()
         {
-           
+            if (User != null)
+            {
+                if (User.Identity.IsAuthenticated == true)
+                {
+                    //currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                    _cartService = new CartMember();
+                }
+            }
+            //AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
         }
         public ActionResult Index()
         {
@@ -27,7 +38,7 @@ namespace ObajuShopping.Controllers
         // GET: /Store/AddToCart/5
         public ActionResult AddtoCart(int? id, int quantity)
         {
-            _cartService.AddToCart(id,quantity);
+            _cartService.AddToCart(id, quantity);
 
             return RedirectToAction("Index");
         }
@@ -39,7 +50,6 @@ namespace ObajuShopping.Controllers
         }
 
         [HttpPost]
-        //[System.Web.Mvc.AllowAnonymous]
         public ActionResult UpdateCart(System.Web.Mvc.FormCollection formc)
         {
             _cartService.UpdateCart(formc);

@@ -14,6 +14,5 @@ namespace ObajuShopping
         public decimal price { get; set; }
         public decimal total { get; set; }
         public int quantity { get; set; }
-        public int productCount { get; set; }
     }
 }
