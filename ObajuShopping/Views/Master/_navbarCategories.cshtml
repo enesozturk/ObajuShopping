@@ -1,8 +1,149 @@
-﻿@model List<ObajuShopping.Models.Category>
-    
-@foreach (var category in Model)
-{
-    <li>
-        <a href="">@category.name</a>
-    </li>
+﻿@model ObajuShopping.ViewModels.CategoryViewModel
+@{
+    var MenShoes = Model.menShoes.ToList();
+    var MenClothes = Model.menClothing.ToList();
+    var MenAccessories = Model.menAccessories.ToList();
+    var LadyClothes = Model.LadyClothing.ToList();
+    var LadyShoes = Model.LadyShoes.ToList();
+    var LadyAccessories = Model.LadyAccessories.ToList();
 }
+
+<li class="dropdown yamm-fw">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li>
+            <div class="yamm-content">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h5>Clothing</h5>
+                        <ul>
+                            @foreach (var category in MenClothes)
+                            {
+                                <li>
+                                    <a href="category.html">@category.name</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Shoes</h5>
+                        <ul>
+                            @foreach (var category in MenShoes)
+                            {
+                                <li>
+                                    <a href="category.html">@category.name</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Accessories</h5>
+                        <ul>
+                            @foreach (var category in MenAccessories)
+                            {
+                                <li>
+                                    <a href="category.html">@category.name</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Featured</h5>
+                        <ul>
+                            <li>
+                                <a href="category.html">Trainers</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Sandals</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Hiking shoes</a>
+                            </li>
+                        </ul>
+                        <h5>Looks and trends</h5>
+                        <ul>
+                            <li>
+                                <a href="category.html">Trainers</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Sandals</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Hiking shoes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </li>
+    </ul>
+</li>
+
+<li class="dropdown yamm-fw">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Ladies <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li>
+            <div class="yamm-content">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h5>Clothing</h5>
+                        <ul>
+                            @foreach (var category in LadyClothes)
+                            {
+                                <li>
+                                    <a href="category.html">@category.name</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Shoes</h5>
+                        <ul>
+                            @foreach (var category in LadyShoes)
+                            {
+                                <li>
+                                    <a href="category.html">@category.name</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Accessories</h5>
+                        <ul>
+                            @foreach (var category in LadyAccessories)
+                            {
+                                <li>
+                                    <a href="category.html">@category.name</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Featured</h5>
+                        <ul>
+                            <li>
+                                <a href="category.html">Trainers</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Sandals</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Hiking shoes</a>
+                            </li>
+                        </ul>
+                        <h5>Looks and trends</h5>
+                        <ul>
+                            <li>
+                                <a href="category.html">Trainers</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Sandals</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Hiking shoes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+</li>
+    </ul>
+</li>
