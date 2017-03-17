@@ -4,6 +4,9 @@ using ObajuShopping.Controllers;
 using ObajuShopping.Interfaces;
 using ObajuShopping.Models;
 using Unity.Mvc5;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ObajuShopping
 {
@@ -11,14 +14,14 @@ namespace ObajuShopping
     {
         public static void RegisterComponents()
         {
-			var container = new UnityContainer();
-            
+            var container = new UnityContainer();
+
             // register all your components with the container here
             // it is NOT necessary to register your controllers
-            
+
             // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<ICartService,CartVisitor>();
-            container.RegisterType<ICartService,CartMember>();
+            container.RegisterType<ICartService, CartVisitor>();
+            container.RegisterType<ICartService, CartMember>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<ManageController>(new InjectionConstructor());
 

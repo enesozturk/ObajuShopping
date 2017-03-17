@@ -19,17 +19,7 @@ namespace Obaju.Controllers
     {
         AaadbEntities db = new AaadbEntities();
         ProductViewModel pvm = new ProductViewModel();
-
-        private readonly ICartService _cartService;
-        public ProductController()
-        {
-
-        }
-        public ProductController(ICartService cartService)
-        {
-            _cartService = cartService;
-        }
-
+        
         // GET: Product
         public ActionResult Index()
         {

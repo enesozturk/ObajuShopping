@@ -1,37 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
+using System.Linq;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using ObajuShopping.Interfaces;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using ObajuShopping;
 using ObajuShopping.Models;
+using ObajuShopping.Interfaces;
 using ObajuShopping.ViewModels;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ObajuShopping.Controllers
 {
     public class CartController : Controller
     {
         AaadbEntities db = new AaadbEntities();
-        public ICartService _cartService = new CartVisitor();
+        public ICartService _cartService;
 
-        //static string currentUserId;
+        static string currentUserId;
+        //public CartController()
+        //{
+
+        //}
         public CartController()
         {
-            if (User != null)
+            //_cartService = cartService;
+
+
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true)
             {
-                if (User.Identity.IsAuthenticated == true)
-                {
-                    //currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                    _cartService = new CartMember();
-                }
+                //currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                _cartService = new CartMember();
             }
-            //AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
+            else
+            {
+                _cartService = new CartVisitor();
+            }
+            AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
         }
         public ActionResult Index()
         {
             var bms = _cartService.basketmodel();
-            ViewBag.productCounts = bms.productCount;
             return View(bms);
         }
 

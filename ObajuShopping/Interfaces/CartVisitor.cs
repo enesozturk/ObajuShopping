@@ -14,9 +14,8 @@ namespace ObajuShopping.Interfaces
 {
     public class CartVisitor : ICartService
     {
-
         AaadbEntities db = new AaadbEntities();
-
+      
         public BasketModel basketmodel()
         {
             BasketModel bm = new BasketModel();
@@ -86,7 +85,6 @@ namespace ObajuShopping.Interfaces
                         isExist.total = (decimal)urun.price * isExist.quantity;
                     }
                     HttpContext.Current.Session["cart"] = cart;
-
                 }
             }
             catch (Exception e)
@@ -104,7 +102,6 @@ namespace ObajuShopping.Interfaces
             HttpContext.Current.Session["cart"] = cart;
         }
 
-        //[System.Web.Mvc.AllowAnonymous]
         public void UpdateCart(System.Web.Mvc.FormCollection formc)
         {
             string[] quantities = (string[])formc.GetValues("quantity");

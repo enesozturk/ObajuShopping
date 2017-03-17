@@ -14,12 +14,13 @@ namespace ObajuShopping.Models
     {
         static AaadbEntities db = new AaadbEntities();
 
-        static string currentUserId;
+        public string currentUserId;
         public CartMember()
         {
-            
+            currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+
+            AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
         }
-        //AspNetUser currentUser = db.AspNetUsers.First(x => x.Id == currentUserId);
 
         public BasketModel basketmodel()
         {
@@ -48,11 +49,12 @@ namespace ObajuShopping.Models
         {
             var urun = db.Products.Find(id);
 
-            var cart = db.Carts.Where(c => c.Product.id == id).ToList();
+            List<Cart> cart = db.Carts.Where(c => c.memberId == currentUserId).ToList();  //db'de member id eşit olanları listele
 
-            if (cart == null)
+            var isExist = cart.Where(p => p.productId == id).FirstOrDefault(); //kartın içindeki paramtredeki id'ye sahip ürün
+
+            if (isExist == null)
             {
-                List<Cart> cart1 = new List<Cart>();
 
                 var yeniSatir = new Cart();
 
@@ -66,28 +68,13 @@ namespace ObajuShopping.Models
             }
             else
             {
-                var isExist = cart.Where(p => p.productId == id).FirstOrDefault(); //kartın içinde var
+                isExist.price = (decimal)urun.price;
+                isExist.quantity++;
+                isExist.total = (decimal)urun.price * isExist.quantity;
 
-                if (isExist == null) //yoksa
-                {
-                    Cart yeniSatir = new Cart();
-
-                    yeniSatir.memberId = currentUserId;
-                    yeniSatir.productId = urun.id;
-                    yeniSatir.price = (decimal)urun.price;
-                    yeniSatir.quantity = quantity;
-                    yeniSatir.total = (decimal)urun.price * quantity;
-
-                    db.Carts.Add(yeniSatir);
-                }
-                else
-                {
-                    isExist.price = (decimal)urun.price;
-                    isExist.quantity++;
-                    isExist.total = (decimal)urun.price * isExist.quantity;
-
-                }
+                db.SaveChanges();
             }
+
             db.SaveChanges();
         }
 
