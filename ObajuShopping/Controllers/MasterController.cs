@@ -10,17 +10,17 @@ namespace ObajuShopping.Controllers
 {
     public class MasterController : Controller
     {
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
         
         public CategoryViewModel NavbarCategories()
         {
             CategoryViewModel cvm = new CategoryViewModel();
-            cvm.menClothing = db.Categories.Where(p => p.topCategory == 4).ToList();
-            cvm.menShoes = db.Categories.Where(p => p.topCategory == 5).ToList();
-            cvm.menAccessories = db.Categories.Where(p => p.topCategory == 6).ToList();
-            cvm.LadyClothing = db.Categories.Where(p => p.topCategory == 16).ToList();
-            cvm.LadyShoes = db.Categories.Where(p => p.topCategory == 17).ToList();
-            cvm.LadyAccessories = db.Categories.Where(p => p.topCategory == 18).ToList();
+            cvm.menClothing = db.Category.Where(p => p.topCategory == 4).ToList();
+            cvm.menShoes = db.Category.Where(p => p.topCategory == 5).ToList();
+            cvm.menAccessories = db.Category.Where(p => p.topCategory == 6).ToList();
+            cvm.LadyClothing = db.Category.Where(p => p.topCategory == 16).ToList();
+            cvm.LadyShoes = db.Category.Where(p => p.topCategory == 17).ToList();
+            cvm.LadyAccessories = db.Category.Where(p => p.topCategory == 18).ToList();
             return cvm;
         }
         public PartialViewResult _navbarCategories()

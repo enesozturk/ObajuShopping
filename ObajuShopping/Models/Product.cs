@@ -17,28 +17,28 @@ namespace ObajuShopping.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Carts = new HashSet<Cart>();
-            this.OrderDetails = new HashSet<OrderDetail>();
-            this.Product_CatgoryRel = new HashSet<Product_CatgoryRel>();
-            this.ProductOptions = new HashSet<ProductOption>();
+            this.Cart = new HashSet<Cart>();
+            this.OrderDetail = new HashSet<OrderDetail>();
+            this.Product_Category_Rel = new HashSet<Product_Category_Rel>();
+            this.ProductOption = new HashSet<ProductOption>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public Nullable<decimal> price { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<bool> status { get; set; }
+        public decimal price { get; set; }
+        public int quantity { get; set; }
+        public bool status { get; set; }
         public string photo { get; set; }
-        public Nullable<bool> specials { get; set; }
+        public bool specials { get; set; }
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_CatgoryRel> Product_CatgoryRel { get; set; }
+        public virtual ICollection<Product_Category_Rel> Product_Category_Rel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductOption> ProductOptions { get; set; }
+        public virtual ICollection<ProductOption> ProductOption { get; set; }
     }
 }

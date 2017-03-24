@@ -21,7 +21,7 @@ namespace ObajuShopping.Models
         public decimal total { get; set; }
         public int quantity { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Product Product { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace ObajuShopping.Controllers
 {
     public class CartController : Controller
     {
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
         public ICartService _cartService;
 
         static string currentUserId;
@@ -38,7 +38,7 @@ namespace ObajuShopping.Controllers
             {
                 _cartService = new CartVisitor();
             }
-            AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
+            AspNetUsers currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
         }
         public ActionResult Index()
         {

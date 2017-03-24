@@ -14,7 +14,7 @@ namespace ObajuShopping.Interfaces
 {
     public class CartVisitor : ICartService
     {
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
       
         public BasketModel basketmodel()
         {
@@ -44,7 +44,7 @@ namespace ObajuShopping.Interfaces
         {
             try
             {
-                var urun = db.Products.Find(id);
+                var urun = db.Product.Find(id);
 
                 if (HttpContext.Current.Session["cart"] == null) // cart session'u yoksa list turunden session olustur
                 {

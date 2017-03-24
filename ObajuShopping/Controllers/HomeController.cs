@@ -6,18 +6,18 @@ using System.Web.Mvc;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 
-namespace Obaju.Controllers
+namespace ObajuShopping.Controllers
 {
     public class HomeController : Controller
     {
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
         public ActionResult Index()
         {
             HomeViewModel hvm = new HomeViewModel();
-            hvm.Posts = db.Blogs.Take(2).ToList();
-            hvm.LatestProducts = db.Products.OrderByDescending(p => p.id).ToList();
-            hvm.Sliders = db.Sliders.OrderBy(p => p.id).ToList();
-            hvm.FeaturedProducts = db.Products.Where(p => p.specials == true).ToList();
+            hvm.Posts = db.Blog.Take(2).ToList();
+            hvm.LatestProducts = db.Product.OrderByDescending(p => p.id).ToList();
+            hvm.Sliders = db.Slider.OrderBy(p => p.id).ToList();
+            hvm.FeaturedProducts = db.Product.Where(p => p.specials == true).ToList();
             return View(hvm);
         }
 

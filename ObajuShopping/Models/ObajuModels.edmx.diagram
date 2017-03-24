@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="39e63311d0d244e0ace0c9c0d8f66685" Name="Diagram1">
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetUsers" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Blog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Cart" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Category" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Option" Width="1.5" PointX="6" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.OptionGroup" Width="1.5" PointX="3.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Order" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.OrderDetail" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Product" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Product_Category_Rel" Width="1.5" PointX="8.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.ProductOption" Width="1.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Slider" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Cart_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Order_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Cart_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Option_OptionGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_ProductOption_Option" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_OrderDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_ProductOption_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

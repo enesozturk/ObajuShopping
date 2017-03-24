@@ -15,7 +15,7 @@ namespace ObajuShopping.Models
     public partial class ProductOption
     {
         public int id { get; set; }
-        public int productiId { get; set; }
+        public int productId { get; set; }
         public int optionId { get; set; }
         public int priceIncrement { get; set; }
         public int optionGroupId { get; set; }

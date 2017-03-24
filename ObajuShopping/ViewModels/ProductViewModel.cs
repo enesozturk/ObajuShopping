@@ -10,23 +10,23 @@ namespace ObajuShopping.ViewModels
 {
     public class ProductViewModel
     {
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
 
         public Product Product { get; set; }
         public List<Product> LatestProducts()
         {
-            return db.Products.OrderByDescending(p => p.id).ToList();
+            return db.Product.OrderByDescending(p => p.id).ToList();
         }
         public List<Product> SpecialProducts()
         {
-            return db.Products.Where(p => p.specials == true).ToList();
+            return db.Product.Where(p => p.specials == true).ToList();
         }
 
-        public List<Product_CatgoryRel> RelatedProducts(int id)
+        public List<Product_Category_Rel> RelatedProducts(int id)
         {
-            var product = db.Product_CatgoryRel.FirstOrDefault(p => p.productId == id && p.isOrigin == true);
+            var product = db.Product_Category_Rel.FirstOrDefault(p => p.productId == id && p.isOrigin == true);
 
-            return db.Product_CatgoryRel.Where(p => p.isOrigin == true && p.productId != product.productId && p.categoryId == product.categoryId).ToList();
+            return db.Product_Category_Rel.Where(p => p.isOrigin == true && p.productId != product.productId && p.categoryId == product.categoryId).ToList();
         }
     }
 }

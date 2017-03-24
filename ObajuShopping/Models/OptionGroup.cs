@@ -17,13 +17,13 @@ namespace ObajuShopping.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OptionGroup()
         {
-            this.Options = new HashSet<Option>();
+            this.Option = new HashSet<Option>();
         }
     
         public int id { get; set; }
-        public string optionGropName { get; set; }
+        public string optionGroupName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Option> Options { get; set; }
+        public virtual ICollection<Option> Option { get; set; }
     }
 }

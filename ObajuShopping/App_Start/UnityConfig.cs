@@ -1,12 +1,8 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
-using ObajuShopping.Controllers;
-using ObajuShopping.Interfaces;
-using ObajuShopping.Models;
 using Unity.Mvc5;
-using System.Data.Entity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+using ObajuShopping.Interfaces;
+using ObajuShopping.Controllers;
 
 namespace ObajuShopping
 {
@@ -14,7 +10,7 @@ namespace ObajuShopping
     {
         public static void RegisterComponents()
         {
-            var container = new UnityContainer();
+			var container = new UnityContainer();
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers

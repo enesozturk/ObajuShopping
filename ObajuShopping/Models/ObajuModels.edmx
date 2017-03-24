@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AaadbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Kurumsal_ObajuShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,9 +62,9 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="yazar" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="tarih" Type="date" Nullable="false" />
+          <Property Name="tarih" Type="datetime" Nullable="false" />
           <Property Name="baslik" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="baslikresim" Type="nvarchar" MaxLength="50" />
+          <Property Name="baslikresim" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="icerik" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Cart">
@@ -66,7 +73,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="productId" Type="int" Nullable="false" />
-          <Property Name="memberId" Type="nvarchar" MaxLength="128" />
+          <Property Name="memberId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
@@ -77,7 +84,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="isActive" Type="bit" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
           <Property Name="topCategory" Type="int" />
         </EntityType>
         <EntityType Name="Option">
@@ -92,28 +99,27 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="optionGropName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="optionGroupName" Type="nvarchar" MaxLength="49" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="orderdate" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="orderTrackingNumber" Type="nvarchar" MaxLength="80" />
+          <Property Name="orderDate" Type="datetime" Nullable="false" />
+          <Property Name="orderTrackingNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orderId" Type="int" Nullable="false" />
           <Property Name="productId" Type="int" Nullable="false" />
-          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
@@ -121,29 +127,29 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="price" Type="money" />
-          <Property Name="quantity" Type="int" />
-          <Property Name="status" Type="bit" />
-          <Property Name="photo" Type="varchar" MaxLength="250" />
-          <Property Name="specials" Type="bit" />
-          <Property Name="description" Type="ntext" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="photo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="specials" Type="bit" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Product-CatgoryRel">
+        <EntityType Name="Product_Category_Rel">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="productId" Type="int" Nullable="false" />
           <Property Name="categoryId" Type="int" Nullable="false" />
-          <Property Name="isOrigin" Type="bit" />
+          <Property Name="isOrigin" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="ProductOptions">
+        <EntityType Name="ProductOption">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="productiId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
           <Property Name="optionId" Type="int" Nullable="false" />
           <Property Name="priceIncrement" Type="int" Nullable="false" />
           <Property Name="optionGroupId" Type="int" Nullable="false" />
@@ -153,10 +159,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="153" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cart_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -207,6 +213,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -245,19 +265,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderDetail_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="orderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrdersDetail_Product">
+        <Association Name="FK_OrderDetail_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -269,55 +277,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product-CatgoryRel_Category">
+        <Association Name="FK_Product_Category_Rel_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Product-CatgoryRel" Type="Self.Product-CatgoryRel" Multiplicity="*" />
+          <End Role="Product_Category_Rel" Type="Self.Product_Category_Rel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Product-CatgoryRel">
+            <Dependent Role="Product_Category_Rel">
               <PropertyRef Name="categoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product-CatgoryRel_Product">
+        <Association Name="FK_Product_Category_Rel_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Product-CatgoryRel" Type="Self.Product-CatgoryRel" Multiplicity="*" />
+          <End Role="Product_Category_Rel" Type="Self.Product_Category_Rel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Product-CatgoryRel">
+            <Dependent Role="Product_Category_Rel">
               <PropertyRef Name="productId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductOptions_Option">
+        <Association Name="FK_ProductOption_Option">
           <End Role="Option" Type="Self.Option" Multiplicity="1" />
-          <End Role="ProductOptions" Type="Self.ProductOptions" Multiplicity="*" />
+          <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Option">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ProductOptions">
+            <Dependent Role="ProductOption">
               <PropertyRef Name="optionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductOptions_Product">
+        <Association Name="FK_ProductOption_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ProductOptions" Type="Self.ProductOptions" Multiplicity="*" />
+          <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ProductOptions">
-              <PropertyRef Name="productiId" />
+            <Dependent Role="ProductOption">
+              <PropertyRef Name="productId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AaadbModelStoreContainer">
+        <EntityContainer Name="Kurumsal_ObajuShoppingModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
@@ -330,8 +339,8 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product-CatgoryRel" EntityType="Self.Product-CatgoryRel" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductOptions" EntityType="Self.ProductOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Category_Rel" EntityType="Self.Product_Category_Rel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductOption" EntityType="Self.ProductOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_AspNetUsers" Association="Self.FK_Cart_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -349,6 +358,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -361,37 +374,41 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrdersDetail_Product" Association="Self.FK_OrdersDetail_Product">
+          <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product-CatgoryRel_Category" Association="Self.FK_Product-CatgoryRel_Category">
+          <AssociationSet Name="FK_Product_Category_Rel_Category" Association="Self.FK_Product_Category_Rel_Category">
             <End Role="Category" EntitySet="Category" />
-            <End Role="Product-CatgoryRel" EntitySet="Product-CatgoryRel" />
+            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product-CatgoryRel_Product" Association="Self.FK_Product-CatgoryRel_Product">
+          <AssociationSet Name="FK_Product_Category_Rel_Product" Association="Self.FK_Product_Category_Rel_Product">
             <End Role="Product" EntitySet="Product" />
-            <End Role="Product-CatgoryRel" EntitySet="Product-CatgoryRel" />
+            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductOptions_Option" Association="Self.FK_ProductOptions_Option">
+          <AssociationSet Name="FK_ProductOption_Option" Association="Self.FK_ProductOption_Option">
             <End Role="Option" EntitySet="Option" />
-            <End Role="ProductOptions" EntitySet="ProductOptions" />
+            <End Role="ProductOption" EntitySet="ProductOption" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductOptions_Product" Association="Self.FK_ProductOptions_Product">
+          <AssociationSet Name="FK_ProductOption_Product" Association="Self.FK_ProductOption_Product">
             <End Role="Product" EntitySet="Product" />
-            <End Role="ProductOptions" EntitySet="ProductOptions" />
+            <End Role="ProductOption" EntitySet="ProductOption" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AaadbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AspNetUserClaim">
+      <Schema Namespace="Kurumsal_ObajuShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -399,9 +416,9 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserLogin">
+        <EntityType Name="AspNetUserLogins">
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
@@ -410,18 +427,9 @@
           <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserRole">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUser">
+        <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -439,9 +447,9 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
-          <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_AspNetUsers" FromRole="AspNetUsers" ToRole="Cart" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_AspNetUsers" FromRole="AspNetUsers" ToRole="Order" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_AspNetUsers" FromRole="AspNetUsers" ToRole="Cart" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_AspNetUsers" FromRole="AspNetUsers" ToRole="Order" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Blog">
           <Key>
@@ -449,9 +457,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="yazar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="tarih" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="baslik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="baslikresim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="baslikresim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Cart">
@@ -460,11 +468,11 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="productId" Type="Int32" Nullable="false" />
-          <Property Name="memberId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="memberId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="total" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Cart_AspNetUsers" FromRole="Cart" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Cart_AspNetUsers" FromRole="Cart" ToRole="AspNetUsers" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Cart_Product" FromRole="Cart" ToRole="Product" />
         </EntityType>
         <EntityType Name="Category">
@@ -473,9 +481,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
           <Property Name="topCategory" Type="Int32" />
-          <NavigationProperty Name="Product_CatgoryRel" Relationship="Self.FK_Product_CatgoryRel_Category" FromRole="Category" ToRole="Product_CatgoryRel" />
+          <NavigationProperty Name="Product_Category_Rel" Relationship="Self.FK_Product_Category_Rel_Category" FromRole="Category" ToRole="Product_Category_Rel" />
         </EntityType>
         <EntityType Name="Option">
           <Key>
@@ -485,93 +493,90 @@
           <Property Name="optionGroupId" Type="Int32" Nullable="false" />
           <Property Name="optionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="OptionGroup" Relationship="Self.FK_Option_OptionGroup" FromRole="Option" ToRole="OptionGroup" />
-          <NavigationProperty Name="ProductOptions" Relationship="Self.FK_ProductOptions_Option" FromRole="Option" ToRole="ProductOptions" />
+          <NavigationProperty Name="ProductOption" Relationship="Self.FK_ProductOption_Option" FromRole="Option" ToRole="ProductOption" />
         </EntityType>
         <EntityType Name="OptionGroup">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="optionGropName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Options" Relationship="Self.FK_Option_OptionGroup" FromRole="OptionGroup" ToRole="Option" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="optionGroupName" Type="String" MaxLength="49" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="Self.FK_Option_OptionGroup" FromRole="OptionGroup" ToRole="Option" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="orderdate" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="orderTrackingNumber" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="orderTrackingNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUsers" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="orderId" Type="Int32" Nullable="false" />
           <Property Name="productId" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_OrdersDetail_Product" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="photo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="specials" Type="Boolean" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Product" FromRole="Product" ToRole="Cart" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrdersDetail_Product" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="Product_CatgoryRel" Relationship="Self.FK_Product_CatgoryRel_Product" FromRole="Product" ToRole="Product_CatgoryRel" />
-          <NavigationProperty Name="ProductOptions" Relationship="Self.FK_ProductOptions_Product" FromRole="Product" ToRole="ProductOptions" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="specials" Type="Boolean" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Product" FromRole="Product" ToRole="Cart" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="Product_Category_Rel" Relationship="Self.FK_Product_Category_Rel_Product" FromRole="Product" ToRole="Product_Category_Rel" />
+          <NavigationProperty Name="ProductOption" Relationship="Self.FK_ProductOption_Product" FromRole="Product" ToRole="ProductOption" />
         </EntityType>
-        <EntityType Name="Product_CatgoryRel">
+        <EntityType Name="Product_Category_Rel">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="productId" Type="Int32" Nullable="false" />
           <Property Name="categoryId" Type="Int32" Nullable="false" />
-          <Property Name="isOrigin" Type="Boolean" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_CatgoryRel_Category" FromRole="Product_CatgoryRel" ToRole="Category" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_CatgoryRel_Product" FromRole="Product_CatgoryRel" ToRole="Product" />
+          <Property Name="isOrigin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category_Rel_Category" FromRole="Product_Category_Rel" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category_Rel_Product" FromRole="Product_Category_Rel" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="productiId" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
           <Property Name="optionId" Type="Int32" Nullable="false" />
           <Property Name="priceIncrement" Type="Int32" Nullable="false" />
           <Property Name="optionGroupId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Option" Relationship="Self.FK_ProductOptions_Option" FromRole="ProductOptions" ToRole="Option" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductOptions_Product" FromRole="ProductOptions" ToRole="Product" />
+          <NavigationProperty Name="Option" Relationship="Self.FK_ProductOption_Option" FromRole="ProductOption" ToRole="Option" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductOption_Product" FromRole="ProductOption" ToRole="Product" />
         </EntityType>
         <EntityType Name="Slider">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="153" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -582,10 +587,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -595,22 +600,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cart_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -622,7 +613,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -645,14 +636,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_CatgoryRel_Category">
+        <Association Name="FK_Product_Category_Rel_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Product_CatgoryRel" Type="Self.Product_CatgoryRel" Multiplicity="*" />
+          <End Role="Product_Category_Rel" Type="Self.Product_Category_Rel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Product_CatgoryRel">
+            <Dependent Role="Product_Category_Rel">
               <PropertyRef Name="categoryId" />
             </Dependent>
           </ReferentialConstraint>
@@ -669,31 +660,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductOptions_Option">
+        <Association Name="FK_ProductOption_Option">
           <End Role="Option" Type="Self.Option" Multiplicity="1" />
-          <End Role="ProductOptions" Type="Self.ProductOption" Multiplicity="*" />
+          <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Option">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ProductOptions">
+            <Dependent Role="ProductOption">
               <PropertyRef Name="optionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderDetail_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="orderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrdersDetail_Product">
+        <Association Name="FK_OrderDetail_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -705,46 +684,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_CatgoryRel_Product">
+        <Association Name="FK_Product_Category_Rel_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Product_CatgoryRel" Type="Self.Product_CatgoryRel" Multiplicity="*" />
+          <End Role="Product_Category_Rel" Type="Self.Product_Category_Rel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Product_CatgoryRel">
+            <Dependent Role="Product_Category_Rel">
               <PropertyRef Name="productId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductOptions_Product">
+        <Association Name="FK_ProductOption_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ProductOptions" Type="Self.ProductOption" Multiplicity="*" />
+          <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ProductOptions">
-              <PropertyRef Name="productiId" />
+            <Dependent Role="ProductOption">
+              <PropertyRef Name="productId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AaadbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRole" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Blogs" EntityType="Self.Blog" />
-          <EntitySet Name="Carts" EntityType="Self.Cart" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Options" EntityType="Self.Option" />
-          <EntitySet Name="OptionGroups" EntityType="Self.OptionGroup" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="Product_CatgoryRel" EntityType="Self.Product_CatgoryRel" />
-          <EntitySet Name="ProductOptions" EntityType="Self.ProductOption" />
-          <EntitySet Name="Sliders" EntityType="Self.Slider" />
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ObajuEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Blog" EntityType="Self.Blog" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Option" EntityType="Self.Option" />
+          <EntitySet Name="OptionGroup" EntityType="Self.OptionGroup" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Product_Category_Rel" EntityType="Self.Product_Category_Rel" />
+          <EntitySet Name="ProductOption" EntityType="Self.ProductOption" />
+          <EntitySet Name="Slider" EntityType="Self.Slider" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -753,49 +736,45 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cart_AspNetUsers" Association="Self.FK_Cart_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_AspNetUsers" Association="Self.FK_Order_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Order" EntitySet="Orders" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_CatgoryRel_Category" Association="Self.FK_Product_CatgoryRel_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product_CatgoryRel" EntitySet="Product_CatgoryRel" />
+          <AssociationSet Name="FK_Product_Category_Rel_Category" Association="Self.FK_Product_Category_Rel_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
           </AssociationSet>
           <AssociationSet Name="FK_Option_OptionGroup" Association="Self.FK_Option_OptionGroup">
-            <End Role="OptionGroup" EntitySet="OptionGroups" />
-            <End Role="Option" EntitySet="Options" />
+            <End Role="OptionGroup" EntitySet="OptionGroup" />
+            <End Role="Option" EntitySet="Option" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductOptions_Option" Association="Self.FK_ProductOptions_Option">
-            <End Role="Option" EntitySet="Options" />
-            <End Role="ProductOptions" EntitySet="ProductOptions" />
+          <AssociationSet Name="FK_ProductOption_Option" Association="Self.FK_ProductOption_Option">
+            <End Role="Option" EntitySet="Option" />
+            <End Role="ProductOption" EntitySet="ProductOption" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrdersDetail_Product" Association="Self.FK_OrdersDetail_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          <AssociationSet Name="FK_Product_Category_Rel_Product" Association="Self.FK_Product_Category_Rel_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_CatgoryRel_Product" Association="Self.FK_Product_CatgoryRel_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Product_CatgoryRel" EntitySet="Product_CatgoryRel" />
+          <AssociationSet Name="FK_ProductOption_Product" Association="Self.FK_ProductOption_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductOption" EntitySet="ProductOption" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductOptions_Product" Association="Self.FK_ProductOptions_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductOptions" EntitySet="ProductOptions" />
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -803,9 +782,17 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AaadbModelStoreContainer" CdmEntityContainer="AaadbEntities">
+        <EntityContainerMapping StorageEntityContainer="Kurumsal_ObajuShoppingModelStoreContainer" CdmEntityContainer="ObajuEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="AaadbModel.AspNetUserClaim">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -815,7 +802,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="AaadbModel.AspNetUserLogin">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -823,16 +810,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserRoles">
-            <EntityTypeMapping TypeName="AaadbModel.AspNetUserRole">
-              <MappingFragment StoreEntitySet="AspNetUserRoles">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="AaadbModel.AspNetUser">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -849,8 +828,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Blogs">
-            <EntityTypeMapping TypeName="AaadbModel.Blog">
+          <EntitySetMapping Name="Blog">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Blog">
               <MappingFragment StoreEntitySet="Blog">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="yazar" ColumnName="yazar" />
@@ -861,8 +840,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Carts">
-            <EntityTypeMapping TypeName="AaadbModel.Cart">
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="productId" ColumnName="productId" />
@@ -873,8 +852,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="AaadbModel.Category">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -883,8 +862,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Options">
-            <EntityTypeMapping TypeName="AaadbModel.Option">
+          <EntitySetMapping Name="Option">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Option">
               <MappingFragment StoreEntitySet="Option">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="optionGroupId" ColumnName="optionGroupId" />
@@ -892,28 +871,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OptionGroups">
-            <EntityTypeMapping TypeName="AaadbModel.OptionGroup">
+          <EntitySetMapping Name="OptionGroup">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.OptionGroup">
               <MappingFragment StoreEntitySet="OptionGroup">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="optionGropName" ColumnName="optionGropName" />
+                <ScalarProperty Name="optionGroupName" ColumnName="optionGroupName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="AaadbModel.Order">
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
                 <ScalarProperty Name="orderTrackingNumber" ColumnName="orderTrackingNumber" />
                 <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="AaadbModel.OrderDetail">
+          <EntitySetMapping Name="OrderDetail">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="orderId" ColumnName="orderId" />
@@ -923,8 +901,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="AaadbModel.Product">
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -937,9 +915,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Product_CatgoryRel">
-            <EntityTypeMapping TypeName="AaadbModel.Product_CatgoryRel">
-              <MappingFragment StoreEntitySet="Product-CatgoryRel">
+          <EntitySetMapping Name="Product_Category_Rel">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Product_Category_Rel">
+              <MappingFragment StoreEntitySet="Product_Category_Rel">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="categoryId" ColumnName="categoryId" />
@@ -947,25 +925,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductOptions">
-            <EntityTypeMapping TypeName="AaadbModel.ProductOption">
-              <MappingFragment StoreEntitySet="ProductOptions">
+          <EntitySetMapping Name="ProductOption">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.ProductOption">
+              <MappingFragment StoreEntitySet="ProductOption">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="productiId" ColumnName="productiId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="optionId" ColumnName="optionId" />
                 <ScalarProperty Name="priceIncrement" ColumnName="priceIncrement" />
                 <ScalarProperty Name="optionGroupId" ColumnName="optionGroupId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sliders">
-            <EntityTypeMapping TypeName="AaadbModel.Slider">
+          <EntitySetMapping Name="Slider">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Slider">
               <MappingFragment StoreEntitySet="Slider">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Kurumsal_ObajuShoppingModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -980,7 +966,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -5,28 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using ObajuShopping.Models;
 using Microsoft.Owin;
 using ObajuShopping.Interfaces;
 
-namespace ObajuShopping.Models
+namespace ObajuShopping.Interfaces
 {
     public class CartMember : ICartService
     {
-        static AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
 
         public string currentUserId;
         public CartMember()
         {
             currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
-            AspNetUser currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
+            AspNetUsers currentUser = db.AspNetUsers.FirstOrDefault(x => x.Id == currentUserId);
         }
 
         public BasketModel basketmodel()
         {
             BasketModel bm = new BasketModel();
             var cart =
-                    db.Carts.Where(c => c.memberId == currentUserId)
+                    db.Cart.Where(c => c.memberId == currentUserId)
                         .Select(s => new Basket
                         {
                             productId = s.productId,
@@ -47,9 +48,9 @@ namespace ObajuShopping.Models
 
         public void AddToCart(int? id, int quantity)
         {
-            var urun = db.Products.Find(id);
+            var urun = db.Product.Find(id);
 
-            List<Cart> cart = db.Carts.Where(c => c.memberId == currentUserId).ToList();  //db'de member id eşit olanları listele
+            List<Cart> cart = db.Cart.Where(c => c.memberId == currentUserId).ToList();  //db'de member id eşit olanları listele
 
             var isExist = cart.Where(p => p.productId == id).FirstOrDefault(); //kartın içindeki paramtredeki id'ye sahip ürün
 
@@ -64,7 +65,7 @@ namespace ObajuShopping.Models
                 yeniSatir.quantity = quantity;
                 yeniSatir.total = (decimal)urun.price * quantity;
 
-                db.Carts.Add(yeniSatir);
+                db.Cart.Add(yeniSatir);
             }
             else
             {
@@ -80,8 +81,8 @@ namespace ObajuShopping.Models
 
         public void DeleteItemFromCart(int id)
         {
-            var cartRow = db.Carts.FirstOrDefault(c => c.productId == id);
-            db.Carts.Remove(cartRow);
+            var cartRow = db.Cart.FirstOrDefault(c => c.productId == id);
+            db.Cart.Remove(cartRow);
             db.SaveChanges();
         }
 
@@ -90,14 +91,14 @@ namespace ObajuShopping.Models
         {
             string[] quantities = (string[])formc.GetValues("quantity");
 
-            var cart = db.Carts.Where(c => c.memberId == currentUserId).ToList();
+            var cart = db.Cart.Where(c => c.memberId == currentUserId).ToList();
             for (int i = 0; i < cart.Count; i++)
             {
                 cart[i].quantity = Convert.ToInt32(quantities[i]);
                 db.SaveChanges();
                 if (cart[i].quantity == 0)
                 {
-                    db.Carts.Remove(cart[i]);
+                    db.Cart.Remove(cart[i]);
                 }
                 else
                 {

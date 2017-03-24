@@ -12,20 +12,18 @@ namespace ObajuShopping.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public AspNetRoles()
         {
-            this.Product_Category_Rel = new HashSet<Product_Category_Rel>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int id { get; set; }
-        public string name { get; set; }
-        public bool isActive { get; set; }
-        public Nullable<int> topCategory { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Category_Rel> Product_Category_Rel { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

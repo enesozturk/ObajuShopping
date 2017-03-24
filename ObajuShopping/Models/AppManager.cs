@@ -14,7 +14,7 @@ namespace ObajuShopping.Models
     {
         public ICartService _cartService = new CartVisitor();
 
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
         
 
         public AppManager()

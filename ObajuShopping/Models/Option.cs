@@ -17,7 +17,7 @@ namespace ObajuShopping.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Option()
         {
-            this.ProductOptions = new HashSet<ProductOption>();
+            this.ProductOption = new HashSet<ProductOption>();
         }
     
         public int id { get; set; }
@@ -26,6 +26,6 @@ namespace ObajuShopping.Models
     
         public virtual OptionGroup OptionGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductOption> ProductOptions { get; set; }
+        public virtual ICollection<ProductOption> ProductOption { get; set; }
     }
 }

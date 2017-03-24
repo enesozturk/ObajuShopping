@@ -13,11 +13,11 @@ using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 using ProductViewModel = ObajuShopping.ViewModels.ProductViewModel;
 
-namespace Obaju.Controllers
+namespace ObajuShopping.Controllers
 {
     public class ProductController : Controller
     {
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
         ProductViewModel pvm = new ProductViewModel();
         
         // GET: Product
@@ -43,7 +43,7 @@ namespace Obaju.Controllers
         {
             ProductViewModel pvm = new ProductViewModel();
             pvm.RelatedProducts(id);
-            pvm.Product = db.Products.Find(id);
+            pvm.Product = db.Product.Find(id);
 
             return View(pvm);
         }

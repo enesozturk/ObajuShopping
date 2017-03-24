@@ -6,18 +6,18 @@ using System.Web.Mvc;
 using ObajuShopping.Models;
 using ObajuShopping.ViewModels;
 
-namespace Obaju.Controllers
+namespace ObajuShopping.Controllers
 {
     [Authorize]
     public class BlogController : Controller
     {
-        AaadbEntities db = new AaadbEntities();
+        ObajuEntities db = new ObajuEntities();
 
         // GET: Blog
         public ActionResult Index()
         {
 
-            var posts = db.Blogs.ToList();
+            var posts = db.Blog.ToList();
 
             return View(posts);
         }
@@ -27,7 +27,7 @@ namespace Obaju.Controllers
         {
             BlogViewModel bvm = new BlogViewModel();
 
-            var post = db.Blogs.FirstOrDefault(f => f.id == id);
+            var post = db.Blog.FirstOrDefault(f => f.id == id);
             if (post == null)
             {
                 throw new HttpException(404, "Couldn't Found");
@@ -35,7 +35,7 @@ namespace Obaju.Controllers
             bvm.post = post;
             if (post != null)
             {
-                bvm.LatestPosts = db.Blogs.OrderByDescending(p => p.yazar == post.yazar && p.id != post.id).ToList();
+                bvm.LatestPosts = db.Blog.OrderByDescending(p => p.yazar == post.yazar && p.id != post.id).ToList();
             }
 
 
