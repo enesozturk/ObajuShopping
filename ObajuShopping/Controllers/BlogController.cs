@@ -8,20 +8,16 @@ using ObajuShopping.ViewModels;
 
 namespace ObajuShopping.Controllers
 {
-    [Authorize]
     public class BlogController : Controller
     {
         ObajuEntities db = new ObajuEntities();
 
-        // GET: Blog
         public ActionResult Index()
         {
-
             var posts = db.Blog.ToList();
 
             return View(posts);
         }
-
 
         public ActionResult Post(int id)
         {
@@ -37,7 +33,6 @@ namespace ObajuShopping.Controllers
             {
                 bvm.LatestPosts = db.Blog.OrderByDescending(p => p.yazar == post.yazar && p.id != post.id).ToList();
             }
-
 
             return View(bvm);
         }

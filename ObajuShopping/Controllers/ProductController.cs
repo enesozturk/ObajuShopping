@@ -42,7 +42,7 @@ namespace ObajuShopping.Controllers
         public ActionResult Detail(int id)
         {
             ProductViewModel pvm = new ProductViewModel();
-            pvm.RelatedProducts(id);
+            //pvm.RelatedProducts(id);
             pvm.Product = db.Product.Find(id);
 
             return View(pvm);

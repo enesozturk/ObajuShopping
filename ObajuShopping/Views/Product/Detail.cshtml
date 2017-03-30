@@ -275,7 +275,7 @@
 
             @foreach (var rps in Model.RelatedProducts(Model.Product.id))
             {
-                
+
                 <div class="col-md-3 col-sm-6">
                     <div class="product same-height">
                         <div class="flip-container">
@@ -306,98 +306,30 @@
 
         </div>
 
-        @*<div class="row same-height-row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="box same-height">
-                        <h3>Products viewed recently</h3>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="product same-height">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front">
-                                    <a href="detail.html">
-                                        <img src="@Url.Content("~/Content/img/")product2.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="back">
-                                    <a href="detail.html">
-                                        <img src="@Url.Content("~/Content/img/")product2_2.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="detail.html" class="invisible">
-                            <img src="@Url.Content("~/Content/img/")product2.jpg" alt="" class="img-responsive">
-                        </a>
-                        <div class="text">
-                            <h3>Fur coat</h3>
-                            <p class="price">$143</p>
-                        </div>
-                    </div>
-                    <!-- /.product -->
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="product same-height">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front">
-                                    <a href="detail.html">
-                                        <img src="@Url.Content("~/Content/img/")product1.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="back">
-                                    <a href="detail.html">
-                                        <img src="@Url.Content("~/Content/img/")product1_2.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="detail.html" class="invisible">
-                            <img src="@Url.Content("~/Content/img/")product1.jpg" alt="" class="img-responsive">
-                        </a>
-                        <div class="text">
-                            <h3>Fur coat</h3>
-                            <p class="price">$143</p>
-                        </div>
-                    </div>
-                    <!-- /.product -->
-                </div>
+        <div class="row same-height-row">
 
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="product same-height">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front">
-                                    <a href="detail.html">
-                                        <img src="@Url.Content("~/Content/img/")product3.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="back">
-                                    <a href="detail.html">
-                                        <img src="@Url.Content("~/Content/img/")product3_2.jpg" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="detail.html" class="invisible">
-                            <img src="@Url.Content("~/Content/img/")product3.jpg" alt="" class="img-responsive">
-                        </a>
-                        <div class="text">
-                            <h3>Fur coat</h3>
-                            <p class="price">$143</p>
+            <div id="disqus_thread"></div>
+            <script>
 
-                        </div>
-                    </div>
-                    <!-- /.product -->
-                </div>
-
-            </div>*@
-
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function () { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://obajushopping.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
 
     </div>
     <!-- /.col-md-9 -->

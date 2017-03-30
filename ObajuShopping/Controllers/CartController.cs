@@ -20,18 +20,11 @@ namespace ObajuShopping.Controllers
         public ICartService _cartService;
 
         static string currentUserId;
-        //public CartController()
-        //{
 
-        //}
         public CartController()
         {
-            //_cartService = cartService;
-
-
             if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true)
             {
-                //currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 _cartService = new CartMember();
             }
             else

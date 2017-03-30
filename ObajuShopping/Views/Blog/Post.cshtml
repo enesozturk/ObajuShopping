@@ -23,122 +23,42 @@
 
 
         <div class="box">
-            
+
             <h1>@Model.post.baslik</h1>
             <p class="author-date">By <a href="#">@Model.post.yazar</a> | @Model.post.tarih</p>
             <p class="lead">This is the lead paragraph of the article. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget.</p>
 
 
             <div class="post-content">
-                @Model.post.icerik    
+                @Model.post.icerik
             </div>
-            
+
 
         </div>
         <!-- /#post-content -->
 
-        <div id="comments" data-animate="fadeInUp">
-            <h4>2 comments</h4>
+        <div id="disqus_thread"></div>
+        <script>
 
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://obajushopping.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-            <div class="row comment">
-                <div class="col-sm-3 col-md-2 text-center-xs">
-                    <p>
-                        <img src="@Url.Content("~/Content/img/")blog-avatar2.jpg" class="img-responsive img-circle" alt="">
-                    </p>
-                </div>
-                <div class="col-sm-9 col-md-10">
-                    <h5>Julie Alma</h5>
-                    <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2011 at 12:00 am</p>
-                    <p>
-                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-                    </p>
-                    <p class="reply">
-                        <a href="#"><i class="fa fa-reply"></i> Reply</a>
-                    </p>
-                </div>
-            </div>
-            <!-- /.comment -->
-
-
-            <div class="row comment last">
-
-                <div class="col-sm-3 col-md-2 text-center-xs">
-                    <p>
-                        <img src="@Url.Content("~/Content/img/")blog-avatar.jpg" class="img-responsive img-circle" alt="">
-                    </p>
-                </div>
-
-                <div class="col-sm-9 col-md-10">
-                    <h5>Louise Armero</h5>
-                    <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2012 at 12:00 am</p>
-                    <p>
-                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-                    </p>
-                    <p class="reply">
-                        <a href="#"><i class="fa fa-reply"></i> Reply</a>
-                    </p>
-                </div>
-
-            </div>
-            <!-- /.comment -->
-
-        </div>
-        <!-- /#comments -->
-
-        <div id="comment-form" data-animate="fadeInUp">
-
-            <h4>Leave comment</h4>
-
-            <form>
-                <div class="row">
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="name">
-                                Name <span class="required">*</span>
-                            </label>
-                            <input type="text" class="form-control" id="name">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="email">
-                                Email <span class="required">*</span>
-                            </label>
-                            <input type="text" class="form-control" id="email">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="comment">
-                                Comment <span class="required">*</span>
-                            </label>
-                            <textarea class="form-control" id="comment" rows="4"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12 text-right">
-                        <button class="btn btn-primary"><i class="fa fa-comment-o"></i> Post comment</button>
-                    </div>
-                </div>
-
-
-            </form>
-
-        </div>
-        <!-- /#comment-form -->
+        @*<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>*@
 
     </div>
 
@@ -175,7 +95,4 @@
     <!-- /.box -->
 </div>
 <!-- /#blog-post -->
-
-
-
 <!-- /.container -->
