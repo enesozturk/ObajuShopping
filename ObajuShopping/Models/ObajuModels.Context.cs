@@ -31,7 +31,6 @@ namespace ObajuShopping.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Blog> Blog { get; set; }
         public virtual DbSet<Cart> Cart { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Option> Option { get; set; }
         public virtual DbSet<OptionGroup> OptionGroup { get; set; }
         public virtual DbSet<Order> Order { get; set; }
@@ -40,5 +39,6 @@ namespace ObajuShopping.Models
         public virtual DbSet<Product_Category_Rel> Product_Category_Rel { get; set; }
         public virtual DbSet<ProductOption> ProductOption { get; set; }
         public virtual DbSet<Slider> Slider { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
     }
 }

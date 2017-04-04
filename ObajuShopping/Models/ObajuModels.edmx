@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Kurumsal_ObajuShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Kurumsal_ObajuShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -185,6 +185,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="topCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -289,7 +301,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Category_Rel_Product">
+        <Association Name="FK_Product_Category_Rel_Product1">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Product_Category_Rel" Type="Self.Product_Category_Rel" Multiplicity="*" />
           <ReferentialConstraint>
@@ -350,6 +362,10 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
+          <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -382,7 +398,7 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Category_Rel_Product" Association="Self.FK_Product_Category_Rel_Product">
+          <AssociationSet Name="FK_Product_Category_Rel_Product1" Association="Self.FK_Product_Category_Rel_Product1">
             <End Role="Product" EntitySet="Product" />
             <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
           </AssociationSet>
@@ -395,8 +411,7 @@
             <End Role="ProductOption" EntitySet="ProductOption" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Kurumsal_ObajuShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -475,16 +490,6 @@
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Cart_AspNetUsers" FromRole="Cart" ToRole="AspNetUsers" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Cart_Product" FromRole="Cart" ToRole="Product" />
         </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="isActive" Type="Boolean" Nullable="false" />
-          <Property Name="topCategory" Type="Int32" />
-          <NavigationProperty Name="Product_Category_Rel" Relationship="Self.FK_Product_Category_Rel_Category" FromRole="Category" ToRole="Product_Category_Rel" />
-        </EntityType>
         <EntityType Name="Option">
           <Key>
             <PropertyRef Name="id" />
@@ -550,8 +555,8 @@
           <Property Name="productId" Type="Int32" Nullable="false" />
           <Property Name="categoryId" Type="Int32" Nullable="false" />
           <Property Name="isOrigin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category_Rel_Category" FromRole="Product_Category_Rel" ToRole="Category" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category_Rel_Product" FromRole="Product_Category_Rel" ToRole="Product" />
+          <NavigationProperty Name="Category" Relationship="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category" FromRole="Product_Category_Rel" ToRole="Category" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
@@ -636,18 +641,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Category_Rel_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Product_Category_Rel" Type="Self.Product_Category_Rel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Product_Category_Rel">
-              <PropertyRef Name="categoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Option_OptionGroup">
           <End Role="OptionGroup" Type="Self.OptionGroup" Multiplicity="1" />
           <End Role="Option" Type="Self.Option" Multiplicity="*" />
@@ -719,7 +712,6 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="Blog" EntityType="Self.Blog" />
           <EntitySet Name="Cart" EntityType="Self.Cart" />
-          <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Option" EntityType="Self.Option" />
           <EntitySet Name="OptionGroup" EntityType="Self.OptionGroup" />
           <EntitySet Name="Order" EntityType="Self.Order" />
@@ -748,10 +740,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Category_Rel_Category" Association="Self.FK_Product_Category_Rel_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
-          </AssociationSet>
           <AssociationSet Name="FK_Option_OptionGroup" Association="Self.FK_Option_OptionGroup">
             <End Role="OptionGroup" EntitySet="OptionGroup" />
             <End Role="Option" EntitySet="Option" />
@@ -776,7 +764,52 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Category" EntityType="Kurumsal_ObajuShoppingModel.Category" />
+          <AssociationSet Name="FK_Category_Category" Association="Kurumsal_ObajuShoppingModel.FK_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category_Rel_Category" Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="topCategory" Type="Int32" />
+          <NavigationProperty Name="Category1" Relationship="Kurumsal_ObajuShoppingModel.FK_Category_Category" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category2" Relationship="Kurumsal_ObajuShoppingModel.FK_Category_Category" FromRole="Category1" ToRole="Category" />
+          <NavigationProperty Name="Product_Category_Rel" Relationship="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category" FromRole="Category" ToRole="Product_Category_Rel" />
+        </EntityType>
+        <Association Name="FK_Category_Category">
+          <End Type="Kurumsal_ObajuShoppingModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="Kurumsal_ObajuShoppingModel.Category" Role="Category1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="topCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category_Rel_Category">
+          <End Type="Kurumsal_ObajuShoppingModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="Kurumsal_ObajuShoppingModel.Product_Category_Rel" Role="Product_Category_Rel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product_Category_Rel">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -849,16 +882,6 @@
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="total" ColumnName="total" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Category">
-            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="topCategory" ColumnName="topCategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -952,6 +975,16 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="topCategory" ColumnName="topCategory" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

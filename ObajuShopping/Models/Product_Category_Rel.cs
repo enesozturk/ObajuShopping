@@ -19,7 +19,7 @@ namespace ObajuShopping.Models
         public int categoryId { get; set; }
         public bool isOrigin { get; set; }
     
-        public virtual Category Category { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Category Category { get; set; }
     }
 }
