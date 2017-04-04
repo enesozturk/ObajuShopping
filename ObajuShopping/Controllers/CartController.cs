@@ -1,16 +1,7 @@
-﻿using System;
-using System.Web;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using ObajuShopping;
 using ObajuShopping.Models;
 using ObajuShopping.Interfaces;
-using ObajuShopping.ViewModels;
-using Microsoft.Owin.Security;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace ObajuShopping.Controllers
 {

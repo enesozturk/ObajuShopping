@@ -102,7 +102,7 @@
                             <a href="@Url.Action("Detail", "Product",new { id = product.id})">@product.name</a>
                         </h3>
                         <p class="text-center buttons"><a href="@Url.Action("AddToCart","Cart",new {id= product.id,quantity = 1})" class="btn btn-primary">Add to Cart</a></p>
-                        <p class="price">@product.price</p>
+                        <p class="price">$@product.price</p>
                     </div>
 
                 </div>

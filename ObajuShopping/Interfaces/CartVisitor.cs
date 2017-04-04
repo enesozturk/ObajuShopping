@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using ObajuShopping.Models;
-using ObajuShopping.ViewModels;
 
 namespace ObajuShopping.Interfaces
 {

@@ -307,19 +307,21 @@
     <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\custom.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\img\AjaxLoader.gif" />
+    <Content Include="Content\img\background1.jpg" />
+    <Content Include="Content\img\background2.jpg" />
+    <Content Include="Content\img\background3.jpg" />
+    <Content Include="Content\img\background4.jpg" />
     <Content Include="Content\img\banner.jpg" />
     <Content Include="Content\img\banner2.jpg" />
     <Content Include="Content\img\basketsquare.jpg" />
     <Content Include="Content\img\blog-avatar.jpg" />
     <Content Include="Content\img\blog-avatar2.jpg" />
-    <Content Include="Content\img\blog.jpg" />
-    <Content Include="Content\img\blog2.jpg" />
+    <Content Include="Content\img\blog\blog1.jpg" />
+    <Content Include="Content\img\blog\blog2.jpg" />
     <Content Include="Content\img\detailbig1.jpg" />
     <Content Include="Content\img\detailbig2.jpg" />
     <Content Include="Content\img\detailbig3.jpg" />
@@ -332,20 +334,12 @@
     <Content Include="Content\img\grabbing.png" />
     <Content Include="Content\img\logo-small.png" />
     <Content Include="Content\img\logo.png" />
-    <Content Include="Content\img\main-slider1.jpg" />
-    <Content Include="Content\img\main-slider2.jpg" />
-    <Content Include="Content\img\main-slider3.jpg" />
-    <Content Include="Content\img\main-slider4.jpg" />
     <Content Include="Content\img\product1.jpg" />
     <Content Include="Content\img\product1_2.jpg" />
     <Content Include="Content\img\product2.jpg" />
     <Content Include="Content\img\product2_2.jpg" />
     <Content Include="Content\img\product3.jpg" />
     <Content Include="Content\img\product3_2.jpg" />
-    <Content Include="Content\img\slider1.jpg" />
-    <Content Include="Content\img\slider2.jpg" />
-    <Content Include="Content\img\slider3.jpg" />
-    <Content Include="Content\img\slider4.jpg" />
     <Content Include="Content\img\slider\getinspired3.jpg" />
     <Content Include="Content\img\slider\main-slider1.jpg" />
     <Content Include="Content\img\slider\main-slider2.jpg" />
@@ -353,12 +347,7 @@
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.theme.css" />
     <Content Include="Content\owl.transitions.css" />
-    <Content Include="Content\style.blue.css" />
     <Content Include="Content\style.default.css" />
-    <Content Include="Content\style.green.css" />
-    <Content Include="Content\style.mono.css" />
-    <Content Include="Content\style.pink.css" />
-    <Content Include="Content\style.violet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\flexslider-icon.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -414,7 +403,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="fonts\flexslider-icon.eot" />
     <Content Include="fonts\flexslider-icon.ttf" />
     <Content Include="fonts\flexslider-icon.woff" />

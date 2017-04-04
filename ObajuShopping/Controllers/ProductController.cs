@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using ObajuShopping.Interfaces;
+﻿using System.Web.Mvc;
 using ObajuShopping.Models;
-using ObajuShopping.ViewModels;
 using ProductViewModel = ObajuShopping.ViewModels.ProductViewModel;
 
 namespace ObajuShopping.Controllers
@@ -19,7 +8,7 @@ namespace ObajuShopping.Controllers
     {
         ObajuEntities db = new ObajuEntities();
         ProductViewModel pvm = new ProductViewModel();
-        
+
         // GET: Product
         public ActionResult Index()
         {
