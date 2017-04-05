@@ -12,7 +12,8 @@ namespace ObajuShopping.Controllers
 
         public List<CategoryViewModel> NavbarCategories()
         {
-            return db.Category.Where(p => p.topCategory == null).Select(s=>new CategoryViewModel { id= s.id, name =s.name,category = (List<Category>) s.Category1 }).ToList();
+            var name = db.Category.Where(p => p.topCategory == null).Select(s=>new CategoryViewModel { id= s.id, name =s.name,category = (List<Category>) s.Category1 }).ToList();
+            return name;
         }
         public PartialViewResult _navbarCategories()
         {

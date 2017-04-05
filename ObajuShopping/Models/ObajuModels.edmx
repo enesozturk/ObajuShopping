@@ -544,19 +544,8 @@
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Product" FromRole="Product" ToRole="Cart" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="Product_Category_Rel" Relationship="Self.FK_Product_Category_Rel_Product" FromRole="Product" ToRole="Product_Category_Rel" />
           <NavigationProperty Name="ProductOption" Relationship="Self.FK_ProductOption_Product" FromRole="Product" ToRole="ProductOption" />
-        </EntityType>
-        <EntityType Name="Product_Category_Rel">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="productId" Type="Int32" Nullable="false" />
-          <Property Name="categoryId" Type="Int32" Nullable="false" />
-          <Property Name="isOrigin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category_Rel_Product" FromRole="Product_Category_Rel" ToRole="Product" />
-          <NavigationProperty Name="Category" Relationship="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category" FromRole="Product_Category_Rel" ToRole="Category" />
+          <NavigationProperty Name="Product_Category_Rel" Relationship="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Product1" FromRole="Product" ToRole="Product_Category_Rel" />
         </EntityType>
         <EntityType Name="ProductOption">
           <Key>
@@ -677,18 +666,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Category_Rel_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Product_Category_Rel" Type="Self.Product_Category_Rel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Product_Category_Rel">
-              <PropertyRef Name="productId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductOption_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductOption" Type="Self.ProductOption" Multiplicity="*" />
@@ -717,7 +694,6 @@
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
           <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="Product_Category_Rel" EntityType="Self.Product_Category_Rel" />
           <EntitySet Name="ProductOption" EntityType="Self.ProductOption" />
           <EntitySet Name="Slider" EntityType="Self.Slider" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -752,10 +728,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Category_Rel_Product" Association="Self.FK_Product_Category_Rel_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductOption_Product" Association="Self.FK_ProductOption_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductOption" EntitySet="ProductOption" />
@@ -769,8 +741,13 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Category1" EntitySet="Category" />
           </AssociationSet>
+          <EntitySet Name="Product_Category_Rel" EntityType="Kurumsal_ObajuShoppingModel.Product_Category_Rel" />
           <AssociationSet Name="FK_Product_Category_Rel_Category" Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category">
             <End Role="Category" EntitySet="Category" />
+            <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category_Rel_Product1" Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Product1">
+            <End Role="Product" EntitySet="Product" />
             <End Role="Product_Category_Rel" EntitySet="Product_Category_Rel" />
           </AssociationSet>
         </EntityContainer>
@@ -798,6 +775,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Product_Category_Rel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="isOrigin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category" FromRole="Product_Category_Rel" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Product1" FromRole="Product_Category_Rel" ToRole="Product" />
+        </EntityType>
         <Association Name="FK_Product_Category_Rel_Category">
           <End Type="Kurumsal_ObajuShoppingModel.Category" Role="Category" Multiplicity="1" />
           <End Type="Kurumsal_ObajuShoppingModel.Product_Category_Rel" Role="Product_Category_Rel" Multiplicity="*" />
@@ -807,6 +795,18 @@
             </Principal>
             <Dependent Role="Product_Category_Rel">
               <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category_Rel_Product1">
+          <End Type="Kurumsal_ObajuShoppingModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="Kurumsal_ObajuShoppingModel.Product_Category_Rel" Role="Product_Category_Rel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product_Category_Rel">
+              <PropertyRef Name="productId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -938,16 +938,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Product_Category_Rel">
-            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Product_Category_Rel">
-              <MappingFragment StoreEntitySet="Product_Category_Rel">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="productId" ColumnName="productId" />
-                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
-                <ScalarProperty Name="isOrigin" ColumnName="isOrigin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProductOption">
             <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.ProductOption">
               <MappingFragment StoreEntitySet="ProductOption">
@@ -981,6 +971,16 @@
                 <ScalarProperty Name="topCategory" ColumnName="topCategory" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Category_Rel">
+            <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Product_Category_Rel">
+              <MappingFragment StoreEntitySet="Product_Category_Rel">
+                <ScalarProperty Name="isOrigin" ColumnName="isOrigin" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

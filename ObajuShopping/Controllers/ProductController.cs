@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using ObajuShopping.Models;
 using ProductViewModel = ObajuShopping.ViewModels.ProductViewModel;
+using System.Linq;
+using ObajuShopping.ViewModels;
 
 namespace ObajuShopping.Controllers
 {
@@ -8,15 +10,20 @@ namespace ObajuShopping.Controllers
     {
         ObajuEntities db = new ObajuEntities();
         ProductViewModel pvm = new ProductViewModel();
+        CategoryDetailViewModel cdvm = new CategoryDetailViewModel();
 
-        // GET: Product
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Category(int id)
+        public ActionResult Category(int categoryid)
         {
-            return View();
+            var urun = db.Product_Category_Rel.Where(w => w.categoryId == categoryid).ToList();
+            var names = db.Category.Where(w => w.id == categoryid).Select(s => s.name).FirstOrDefault();
+            cdvm.categories = urun;
+            cdvm.id = categoryid;
+            cdvm.name = names;
+            return View(cdvm);
         }
         public ActionResult Latest()
         {

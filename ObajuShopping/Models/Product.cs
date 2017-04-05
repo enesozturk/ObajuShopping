@@ -19,8 +19,8 @@ namespace ObajuShopping.Models
         {
             this.Cart = new HashSet<Cart>();
             this.OrderDetail = new HashSet<OrderDetail>();
-            this.Product_Category_Rel = new HashSet<Product_Category_Rel>();
             this.ProductOption = new HashSet<ProductOption>();
+            this.Product_Category_Rel = new HashSet<Product_Category_Rel>();
         }
     
         public int id { get; set; }
@@ -37,8 +37,8 @@ namespace ObajuShopping.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Category_Rel> Product_Category_Rel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductOption> ProductOption { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_Category_Rel> Product_Category_Rel { get; set; }
     }
 }

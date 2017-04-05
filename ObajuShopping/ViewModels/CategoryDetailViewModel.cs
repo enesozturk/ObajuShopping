@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace ObajuShopping.ViewModels
 {
-    public class CategoryViewModel
+    public class CategoryDetailViewModel
     {
         public int id { get; set; }
         public string name { get; set; }
-        public List<Category> category { get; set; }
+        public List<Product_Category_Rel> categories { get; set; }
     }
 }

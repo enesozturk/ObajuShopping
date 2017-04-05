@@ -36,9 +36,9 @@ namespace ObajuShopping.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<Product_Category_Rel> Product_Category_Rel { get; set; }
         public virtual DbSet<ProductOption> ProductOption { get; set; }
         public virtual DbSet<Slider> Slider { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Product_Category_Rel> Product_Category_Rel { get; set; }
     }
 }

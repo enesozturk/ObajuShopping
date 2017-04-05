@@ -8,7 +8,12 @@ namespace ObajuShopping.ViewModels
     {
         ObajuEntities db = new ObajuEntities();
 
+        public int id { get; set; }
+        public string name { get; set; }
+        public List<Product> product { get; set; }
+
         public Product Product { get; set; }
+
         public List<Product> LatestProducts()
         {
             return db.Product.OrderByDescending(p => p.id).ToList();
@@ -17,7 +22,10 @@ namespace ObajuShopping.ViewModels
         {
             return db.Product.Where(p => p.specials == true).ToList();
         }
-
+        public List<Product_Category_Rel> CategoryProducts(int categoryid)
+        {
+            return db.Product_Category_Rel.Where(w => w.id == categoryid).ToList();
+        }
         public List<Product_Category_Rel> RelatedProducts(int id)
         {
             var product = db.Product_Category_Rel.FirstOrDefault(p => p.productId == id && p.isOrigin == true);

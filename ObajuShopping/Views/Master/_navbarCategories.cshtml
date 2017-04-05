@@ -1,4 +1,4 @@
-﻿@model List<ObajuShopping.CategoryViewModel>
+﻿@model List<ObajuShopping.ViewModels.CategoryViewModel>
 
 @foreach (var topCat in Model)
 {
@@ -17,7 +17,7 @@
                                     @foreach (var subCat2 in subCat1.Category1.Select(s => new { s.name, s.id }).ToList())
                                     {
                                         <li>
-                                            <a href="category.html">@subCat2.name</a>
+                                            <a href="@Url.Action("Category","Product",new { categoryid = subCat2.id })">@subCat2.name</a>
                                         </li>
                                     }
                                 </ul>

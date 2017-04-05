@@ -13,7 +13,7 @@
                 <a href="#">Products</a>
             </li>
             <li>
-                <a href="#">@Model.Product.name</a>
+                @Model.Product.name
             </li>
         </ul>
 
@@ -276,31 +276,31 @@
             @foreach (var rps in Model.RelatedProducts(Model.Product.id))
             {
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="product same-height">
-                        <div class="flip-container">
-                            <div class="flipper">
-                                <div class="front">
-                                    <a href="@Url.Action("Detail","Product",new {id=rps.productId})">
-                                        <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="back">
-                                    <a href="@Url.Action("Detail","Product",new {id=rps.id})">
-                                        <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
-                                    </a>
-                                </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="product same-height">
+                    <div class="flip-container">
+                        <div class="flipper">
+                            <div class="front">
+                                <a href="@Url.Action("Detail","Product",new {id=rps.productId})">
+                                    <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="back">
+                                <a href="@Url.Action("Detail","Product",new {id=rps.id})">
+                                    <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
+                                </a>
                             </div>
                         </div>
-                        <a href="@Url.Action("Detail","Product",new {id=rps.id})" class="invisible">
-                            <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
-                        </a>
-                        <div class="text">
-                            <h3>@rps.Product.name</h3>
-                            <p class="price">$@rps.Product.price</p>
-                        </div>
+                    </div>
+                    <a href="@Url.Action("Detail","Product",new {id=rps.id})" class="invisible">
+                        <img src="@Url.Content("~/Content/img/")@rps.Product.photo" alt="" class="img-responsive">
+                    </a>
+                    <div class="text">
+                        <h3>@rps.Product.name</h3>
+                        <p class="price">$@rps.Product.price</p>
                     </div>
                 </div>
+            </div>
 
             }
 

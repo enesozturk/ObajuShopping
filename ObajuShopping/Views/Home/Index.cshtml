@@ -10,9 +10,9 @@
         <div id="main-slider" class="owl-carousel owl-theme">
             @foreach (var photos in Model.Sliders)
             {
-            <div class="item">
-                <img src="@Url.Content("~/Content/img/slider/")@photos.name" alt="" class="img-responsive">
-            </div>
+                <div class="item">
+                    <img src="@Url.Content("~/Content/img/slider/")@photos.name" alt="" class="img-responsive">
+                </div>
             }
         </div>
 
@@ -78,36 +78,36 @@
 
             @foreach (var product in Model.LatestProducts)
             {
-            <div class="item">
-                <div class="product">
-                    <div class="flip-container">
-                        <div class="flipper">
-                            <div class="front">
-                                <a href="@Url.Action("Detail", "Product",new { id = product.id})">
-                                    <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="back">
-                                <a href="@Url.Action("Detail", "Product",new { id = product.id})">
-                                    <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
-                                </a>
+                <div class="item">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="@Url.Action("Detail", "Product",new { id = product.id})">
+                                        <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="@Url.Action("Detail", "Product",new { id = product.id})">
+                                        <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <a href="@Url.Action("Detail", "Product",new { id = product.id})" class="invisible">
-                        <img src="@Url.Content("~/Content/img/")product1.jpg" alt="" class="img-responsive">
-                    </a>
-                    <div class="text">
-                        <h3>
-                            <a href="@Url.Action("Detail", "Product",new { id = product.id})">@product.name</a>
-                        </h3>
-                        <p class="text-center buttons"><a href="@Url.Action("AddToCart","Cart",new {id= product.id,quantity = 1})" class="btn btn-primary">Add to Cart</a></p>
-                        <p class="price">$@product.price</p>
+                        <a href="@Url.Action("Detail", "Product",new { id = product.id})" class="invisible">
+                            <img src="@Url.Content("~/Content/img/")product1.jpg" alt="" class="img-responsive">
+                        </a>
+                        <div class="text">
+                            <h3>
+                                <a href="@Url.Action("Detail", "Product",new { id = product.id})">@product.name</a>
+                            </h3>
+                            <p class="text-center buttons"><a href="@Url.Action("AddToCart","Cart",new {id= product.id,quantity = 1})" class="btn btn-primary">Add to Cart</a></p>
+                            <p class="price">$@product.price</p>
+                        </div>
+
                     </div>
 
                 </div>
-
-            </div>
             }
 
         </div>
@@ -127,36 +127,36 @@
 
             @foreach (var product in Model.FeaturedProducts)
             {
-            <div class="item">
-                <div class="product">
-                    <div class="flip-container">
-                        <div class="flipper">
-                            <div class="front">
-                                <a href="@Url.Action("Detail", "Product",new { id = product.id})">
-                                    <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="back">
-                                <a href="@Url.Action("Detail", "Product",new { id = product.id})">
-                                    <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
-                                </a>
+                <div class="item">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="@Url.Action("Detail", "Product",new { id = product.id})">
+                                        <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="@Url.Action("Detail", "Product",new { id = product.id})">
+                                        <img src="@Url.Content("~/Content/img/")@product.photo" alt="" class="img-responsive">
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <a href="@Url.Action("Detail", "Product",new { id = product.id}))" class="invisible">
-                        <img src="@Url.Content("~/Content/img/")product1.jpg" alt="" class="img-responsive">
-                    </a>
-                    <div class="text">
-                        <h3>
-                            <a href="@Url.Action("Detail", "Product",new { id = product.id})">@product.name</a>
-                        </h3>
-                        <p class="text-center buttons"><a href="@Url.Action("AddToCart","Cart",new {id= product.id,quantity = 1})" class="btn btn-primary">Add to Cart</a></p>
-                        <p class="price">$@product.price</p>
+                        <a href="@Url.Action("Detail", "Product",new { id = product.id}))" class="invisible">
+                            <img src="@Url.Content("~/Content/img/")product1.jpg" alt="" class="img-responsive">
+                        </a>
+                        <div class="text">
+                            <h3>
+                                <a href="@Url.Action("Detail", "Product",new { id = product.id})">@product.name</a>
+                            </h3>
+                            <p class="text-center buttons"><a href="@Url.Action("AddToCart","Cart",new {id= product.id,quantity = 1})" class="btn btn-primary">Add to Cart</a></p>
+                            <p class="price">$@product.price</p>
+                        </div>
+
                     </div>
 
                 </div>
-
-            </div>
             }
 
         </div>
@@ -210,22 +210,22 @@
         <div id="blog-homepage" class="row">
             @foreach (var post in Model.Posts)
             {
-            <div class="col-sm-6">
-                <div class="post">
-                    <h4><a href="@Url.Action("Post", "Blog",new {id = post.id})">@post.baslik</a></h4>
-                    <p class="author-category">
-                        By <a href="#">@post.yazar</a> in <a href="">Fashion and style</a>
-                    </p>
-                    <hr>
-                    <p class="intro">
-                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                        ultricies mi vitae est. Mauris placerat eleifend leo.
-                    </p>
-                    <p class="read-more">
-                        <a href="@Url.Action("Post", "Blog", new {id = post.id})" class="btn btn-primary">Continue reading</a>
-                    </p>
+                <div class="col-sm-6">
+                    <div class="post">
+                        <h4><a href="@Url.Action("Post", "Blog",new {id = post.id})">@post.baslik</a></h4>
+                        <p class="author-category">
+                            By <a href="#">@post.yazar</a> in <a href="">Fashion and style</a>
+                        </p>
+                        <hr>
+                        <p class="intro">
+                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+                            ultricies mi vitae est. Mauris placerat eleifend leo.
+                        </p>
+                        <p class="read-more">
+                            <a href="@Url.Action("Post", "Blog", new {id = post.id})" class="btn btn-primary">Continue reading</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
             }
 
         </div>
