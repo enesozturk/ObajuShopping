@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuShopping", "ObajuShopping\ObajuShopping.csproj", "{42FB795C-C2B6-4E14-9E13-38A07DAEE555}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuShopping.Web", "ObajuShopping\ObajuShopping.Web.csproj", "{42FB795C-C2B6-4E14-9E13-38A07DAEE555}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1C8F6355-7B77-45B2-9BF2-4D1D1568A29E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuShopping.Admin", "ObajuShopping.Admin\ObajuShopping.Admin.csproj", "{FB42C4FF-58A9-4BB8-A4C6-792FA02084E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +19,16 @@ Global
 		{42FB795C-C2B6-4E14-9E13-38A07DAEE555}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42FB795C-C2B6-4E14-9E13-38A07DAEE555}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42FB795C-C2B6-4E14-9E13-38A07DAEE555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB42C4FF-58A9-4BB8-A4C6-792FA02084E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB42C4FF-58A9-4BB8-A4C6-792FA02084E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB42C4FF-58A9-4BB8-A4C6-792FA02084E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB42C4FF-58A9-4BB8-A4C6-792FA02084E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42FB795C-C2B6-4E14-9E13-38A07DAEE555} = {1C8F6355-7B77-45B2-9BF2-4D1D1568A29E}
+		{FB42C4FF-58A9-4BB8-A4C6-792FA02084E0} = {1C8F6355-7B77-45B2-9BF2-4D1D1568A29E}
 	EndGlobalSection
 EndGlobal
