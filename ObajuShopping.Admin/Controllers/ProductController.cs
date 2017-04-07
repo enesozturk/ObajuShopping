@@ -1,11 +1,16 @@
-﻿using System.Web.Mvc;
+﻿using ObajuShopping.Admin.Models;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace ObajuShopping.Admin.Controllers
 {
     public class ProductController : Controller
     {
+        ObajuEntities db = new ObajuEntities();
         public ActionResult List()
         {
+            var data = db.list_products_reg().ToList();
+            ViewBag.products = data;
             return View();
         }
         public ActionResult Create()

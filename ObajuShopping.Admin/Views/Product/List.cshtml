@@ -133,7 +133,7 @@
                         <div class="row">
                             <div class="col-md-7 col-md-offset-5">
                                 <button type="button" id="search-products" class="btn btn-primary btn-search"><i class="fa fa-search"></i>Search</button>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                         <table class="table" role="grid">
                             <thead class="k-grid-header">
                                 <tr role="row">
-                                    <th style="text-align:center"><input type="checkbox" id="mastercheckbox"/></th>
+                                    <th style="text-align:center"><input type="checkbox" id="mastercheckbox" /></th>
                                     <th>Picture</th>
                                     <th>Product Name</th>
                                     <th>SKU </th>
@@ -151,16 +151,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox"  value="1" />
-                                    </td>
-                                    <td style="width:50px" role="gridcell"> <img class="list-image" src="http://admin-demo.nopcommerce.com/content/images/thumbs/0000076_100-physical-gift-card_75.jpeg"></td>
-                                    <td role="gridcell">Cell 2</td>
-                                    <td role="gridcell">Cell 2</td>
-                                    <td role="gridcell">Cell 2</td>
-                                    <td role="gridcell"><button type="button" class="btn btn-default"><i class="fa fa-pencil"></i></button></td>
-                                </tr>
+                                @foreach (var product in ViewBag.products)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" value="1" />
+                                        </td>
+                                        <td style="width:50px" role="gridcell"> <img class="list-image" src="@Url.Content("~/Content/img/")@product.photo"></td>
+                                        <td role="gridcell">@product.name</td>
+                                        <td role="gridcell"></td>
+                                        <td role="gridcell">@product.price</td>
+                                        <td role="gridcell"><button type="button" class="btn btn-default"><i class="fa fa-pencil"></i></button></td>
+                                    </tr>
+                                }
+
                             </tbody>
                         </table>
                         <nav>
