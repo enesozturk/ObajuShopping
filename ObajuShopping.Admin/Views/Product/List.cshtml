@@ -3,6 +3,183 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<form action="/" method="post">
+    <div class="content-header clearfix">
+        <h1 class="pull-left" style="/*float:left !important;*/">Products <small>some text</small></h1>
+        <div class="pull-right" style="display:block;box-sizing:border-box;margin-top:15px;">
+            <a href="@Url.Action("Create","Product")" class="btn bg-success"><i class="fa fa-plus-square"></i> Add New</a>
+            <button type="button" class="btn bg-info">Download catalog as PDF</button>
+            <button type="button" class="btn bg-info">Export</button>
+            <button type="button" class="btn bg-success">Import</button>
+            <button type="button" class="btn bg-danger"><i class="fa fa-trash-o"></i> Delete</button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default panel-search">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Product Name </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Category </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select>
+                                            <optgroup label="This is a group">
+                                                <option value="12" selected="">This is item 1</option>
+                                                <option value="13">This is item 2</option>
+                                                <option value="14">This is item 3</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Search sub </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Manufac. </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Vendor </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Warehouse </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Product Type </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Published </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="frmgrp">
+                                    <div class="col-md-4">
+                                        <div class="label-wrapper">
+                                            <label>Go SKU </label><i class="fa fa-question-circle"></i>
+                                            <div class="icon-help" title="A product name"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="SearchProductName" class="form-control text-box single-line" name="SearchProductName" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-5">
+                                <button type="button" id="search-products" class="btn btn-primary btn-search"><i class="fa fa-search"></i>Search</button>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div id="products-grid" class="k-gid">
+                        <table class="table" role="grid">
+                            <thead class="k-grid-header">
+                                <tr role="row">
+                                    <th style="text-align:center"><input type="checkbox" id="mastercheckbox"/></th>
+                                    <th>Picture</th>
+                                    <th>Product Name</th>
+                                    <th>SKU </th>
+                                    <th>Price </th>
+                                    <th>Edit </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"  value="1" />
+                                    </td>
+                                    <td style="width:50px" role="gridcell"> <img class="list-image" src="http://admin-demo.nopcommerce.com/content/images/thumbs/0000076_100-physical-gift-card_75.jpeg"></td>
+                                    <td role="gridcell">Cell 2</td>
+                                    <td role="gridcell">Cell 2</td>
+                                    <td role="gridcell">Cell 2</td>
+                                    <td role="gridcell"><button type="button" class="btn btn-default"><i class="fa fa-pencil"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <nav>
+                            <ul class="pagination">
+                                <li><a aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                <li><a>1</a></li>
+                                <li><a>2</a></li>
+                                <li><a>3</a></li>
+                                <li><a>4</a></li>
+                                <li><a>5</a></li>
+                                <li><a aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<h2>Product List Page</h2>
+    </div>
+</form>
+
 
