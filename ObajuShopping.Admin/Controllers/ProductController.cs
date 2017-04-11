@@ -6,12 +6,17 @@ namespace ObajuShopping.Admin.Controllers
 {
     public class ProductController : Controller
     {
-        ObajuEntities db = new ObajuEntities();
+        ObajuEntitiesAdmin db = new ObajuEntitiesAdmin();
+
         public ActionResult List()
         {
-            var data = db.list_products_reg().ToList();
-            ViewBag.products = data;
             return View();
+        }
+        public ActionResult ProductList()
+        {
+            var products = db.Product.OrderBy(p => p.name).ToList();
+            return Json(products, JsonRequestBehavior.AllowGet);
+
         }
         public ActionResult Create()
         {
@@ -25,7 +30,6 @@ namespace ObajuShopping.Admin.Controllers
         {
             return View();
         }
-
         public ActionResult AddProduct()
         {
             return View();

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ObajuShopping.Models
+namespace ObajuShopping.Admin.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,8 +18,6 @@ namespace ObajuShopping.Models
         public Category()
         {
             this.Category1 = new HashSet<Category>();
-            this.Product_Category_Rel = new HashSet<Product_Category_Rel>();
-            this.Product_Category_Rel1 = new HashSet<Product_Category_Rel>();
         }
     
         public int id { get; set; }
@@ -30,9 +28,5 @@ namespace ObajuShopping.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category> Category1 { get; set; }
         public virtual Category Category2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Category_Rel> Product_Category_Rel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Category_Rel> Product_Category_Rel1 { get; set; }
     }
 }

@@ -12,13 +12,11 @@ namespace ObajuShopping.Admin.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class ObajuEntities : DbContext
+    public partial class ObajuEntitiesAdmin : DbContext
     {
-        public ObajuEntities()
-            : base("name=ObajuEntities")
+        public ObajuEntitiesAdmin()
+            : base("name=ObajuEntitiesAdmin")
         {
         }
     
@@ -27,11 +25,7 @@ namespace ObajuShopping.Admin.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-    
-        public virtual ObjectResult<list_products_reg_Result> list_products_reg()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<list_products_reg_Result>("list_products_reg");
-        }
     }
 }

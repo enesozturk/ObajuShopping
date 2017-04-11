@@ -154,7 +154,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\list_products_reg_Result.cs">
+    <Compile Include="Models\Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -186,7 +186,6 @@
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\plugins\morris.css" />
     <Content Include="Content\sb-admin-rtl.css" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="favicon.ico" />
@@ -198,17 +197,13 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery.dynamiclist.js" />
+    <Content Include="Scripts\jquery.dynamiclist.min.js" />
     <Content Include="Scripts\jquery.js" />
-    <Content Include="Scripts\plugins\flot\excanvas.min.js" />
-    <Content Include="Scripts\plugins\flot\flot-data.js" />
-    <Content Include="Scripts\plugins\flot\jquery.flot.js" />
-    <Content Include="Scripts\plugins\flot\jquery.flot.pie.js" />
-    <Content Include="Scripts\plugins\flot\jquery.flot.resize.js" />
-    <Content Include="Scripts\plugins\flot\jquery.flot.tooltip.min.js" />
-    <Content Include="Scripts\plugins\morris\morris-data.js" />
-    <Content Include="Scripts\plugins\morris\morris.js" />
-    <Content Include="Scripts\plugins\morris\morris.min.js" />
-    <Content Include="Scripts\plugins\morris\raphael.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.dynamic.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.dynamic.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -250,6 +245,49 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Category\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObajuShopping\ObajuShopping.Web.csproj">
+      <Project>{42fb795c-c2b6-4e14-9e13-38a07daee555}</Project>
+      <Name>ObajuShopping.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -280,52 +318,6 @@
     <Content Include="Content\font-awesome\scss\_spinning.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\FontAwesome.otf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Product\List.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Category\List.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Product\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ObajuShopping\ObajuShopping.Web.csproj">
-      <Project>{42fb795c-c2b6-4e14-9e13-38a07daee555}</Project>
-      <Name>ObajuShopping.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

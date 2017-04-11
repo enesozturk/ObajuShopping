@@ -3,6 +3,58 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Category List Page</h2>
-
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Category/CategoryList",
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                $("#category-list-table").DataTable({
+                    data: data,
+                    columns: [
+                        { "data": "id", "autoWidth": true },
+                        { "data": "name", "autoWidth": true },
+                        { "data": "isActive", "autoWidth": true },
+                    ]
+                })
+            }
+        })
+    })
+</script>
+   @*{ "data": "topCategory", "autoWidth": true },
+                        { "data": "Category1", "autoWidth": true },
+                        { "data": "Category2", "autoWidth": true },*@
+<form action="/" method="post">
+    <div class="content-header clearfix">
+        <h1 class="pull-left" style="/*float:left !important;*/">Products <small>some text</small></h1>
+        <div class="pull-right" style="display:block;box-sizing:border-box;margin-top:15px;">
+            <a href="@Url.Action("Create","Product")" class="btn bg-success"><i class="fa fa-plus-square"></i> Add New</a>
+            <button type="button" class="btn bg-info">Download catalog as PDF</button>
+            <button type="button" class="btn bg-info">Export</button>
+            <button type="button" class="btn bg-success">Import</button>
+            <button type="button" class="btn bg-danger"><i class="fa fa-trash-o"></i> Delete</button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div id="products-grid person-list" class="k-gid">
+                        <table id="category-list-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Category Name</th>
+                                    <th>Is Active</th>
+                                    <th>Top Category</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

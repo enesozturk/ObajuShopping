@@ -20,6 +20,7 @@ namespace ObajuShopping.Models
         public bool isOrigin { get; set; }
     
         public virtual Category Category { get; set; }
+        public virtual Category Category1 { get; set; }
         public virtual Product Product { get; set; }
     }
 }

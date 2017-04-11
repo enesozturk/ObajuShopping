@@ -4,18 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="39e63311d0d244e0ace0c9c0d8f66685" Name="Diagram1">
+      <Diagram DiagramId="e6bcca81c8764688beebeae786e24594" Name="Diagram1">
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.AspNetUsers" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Blog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Cart" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Category" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Option" Width="1.5" PointX="6" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.OptionGroup" Width="1.5" PointX="3.75" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Order" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.OrderDetail" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Product" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Product_Category_Rel" Width="1.5" PointX="10" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.ProductOption" Width="1.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Slider" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -23,16 +25,15 @@
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Cart_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Order_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Cart_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Category_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category1" ManuallyRouted="false" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Option_OptionGroup" ManuallyRouted="false" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_ProductOption_Option" ManuallyRouted="false" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_OrderDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Product1" ManuallyRouted="false" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_ProductOption_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Category" Width="1.5" PointX="7.375" PointY="1" />
-        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Category_Category" />
-        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Product_Category_Rel" Width="1.5" PointX="9.625" PointY="9.625" />
-        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Category" />
-        <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Product_Category_Rel_Product1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -64,7 +64,6 @@
     <link href="@Url.Content("~/Content/owl.theme.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/owl.transitions.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/style.default.css")" rel="stylesheet" type="text/css" />
-
 </head>
 <body>
 
@@ -113,8 +112,8 @@
                         <a href="@Url.Action("Special", "Product")">Specials</a>
                     </li>
                     @*<li @(ViewContext.RouteData.Values["action"].ToString().Equals("Latest") && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=active" : "")>
-                        <a href="@Url.Action("Latest", "Product")">Latests</a>
-                    </li>*@
+                            <a href="@Url.Action("Latest", "Product")">Latests</a>
+                        </li>*@
                     <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Index") && ViewContext.RouteData.Values["controller"].ToString().Equals("Blog") ? "class=active dropdown yamm-fw" : "dropdown yamm-fw")>
                         <a href="@Url.Action("Index", "Blog")">Blog</a>
                     </li>
