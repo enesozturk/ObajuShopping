@@ -88,7 +88,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ObajuEntitiesAdmin" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ObajuShoppingAdmin" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
@@ -101,7 +101,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Kurumsal_ObajuShoppingModelStoreContainer" CdmEntityContainer="ObajuEntitiesAdmin">
+        <EntityContainerMapping StorageEntityContainer="Kurumsal_ObajuShoppingModelStoreContainer" CdmEntityContainer="ObajuShoppingAdmin">
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="Kurumsal_ObajuShoppingModel.Category">
               <MappingFragment StoreEntitySet="Category">

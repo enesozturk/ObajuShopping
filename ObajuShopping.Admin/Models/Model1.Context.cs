@@ -13,10 +13,10 @@ namespace ObajuShopping.Admin.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ObajuEntitiesAdmin : DbContext
+    public partial class ObajuShoppingAdmin : DbContext
     {
-        public ObajuEntitiesAdmin()
-            : base("name=ObajuEntitiesAdmin")
+        public ObajuShoppingAdmin()
+            : base("name=ObajuShoppingAdmin")
         {
         }
     

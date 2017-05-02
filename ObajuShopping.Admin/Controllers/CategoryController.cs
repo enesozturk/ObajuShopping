@@ -9,7 +9,7 @@ namespace ObajuShopping.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        ObajuEntitiesAdmin db = new ObajuEntitiesAdmin();
+        ObajuShoppingAdmin db = new ObajuShoppingAdmin();
 
         public ActionResult List()
         {
@@ -17,9 +17,7 @@ namespace ObajuShopping.Admin.Controllers
         }
         public ActionResult CategoryList()
         {
-            var categories = db.Category.OrderBy(p => p.id).FirstOrDefault();
-            
-            //var categories = db.Category.OrderBy(p => p.name).ToList();
+            var categories = db.Category.Select(s=> new { s.id, s.name, s.isActive }).OrderBy(p => p.name);
             return Json(categories, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Create()

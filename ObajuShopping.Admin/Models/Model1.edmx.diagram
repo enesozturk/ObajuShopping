@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="971293217ba14da28061b585a264966b" Name="Diagram1">
+      <Diagram DiagramId="8211b9b26c6a462b81fa6cd0d4796dd7" Name="Diagram1">
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Product" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Category_Category" ManuallyRouted="false" />

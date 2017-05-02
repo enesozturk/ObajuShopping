@@ -10,7 +10,7 @@
             method: 'post',
             dataType: 'json',
             success: function (data) {
-                $("#category-list-table").DataTable({
+                table({
                     data: data,
                     columns: [
                         { "data": "id", "autoWidth": true },
@@ -22,12 +22,10 @@
         })
     })
 </script>
-   @*{ "data": "topCategory", "autoWidth": true },
-                        { "data": "Category1", "autoWidth": true },
-                        { "data": "Category2", "autoWidth": true },*@
+
 <form action="/" method="post">
     <div class="content-header clearfix">
-        <h1 class="pull-left" style="/*float:left !important;*/">Products <small>some text</small></h1>
+        <h1 class="pull-left" style="/*float:left !important;*/">Categories <small>some text</small></h1>
         <div class="pull-right" style="display:block;box-sizing:border-box;margin-top:15px;">
             <a href="@Url.Action("Create","Product")" class="btn bg-success"><i class="fa fa-plus-square"></i> Add New</a>
             <button type="button" class="btn bg-info">Download catalog as PDF</button>
@@ -47,7 +45,6 @@
                                     <th></th>
                                     <th>Category Name</th>
                                     <th>Is Active</th>
-                                    <th>Top Category</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
