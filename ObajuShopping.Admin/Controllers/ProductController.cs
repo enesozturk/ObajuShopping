@@ -8,6 +8,7 @@ using Kendo;
 using Kendo.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using ObajuShopping.Admin.Services;
 
 
 namespace ObajuShopping.Admin.Controllers
@@ -15,6 +16,8 @@ namespace ObajuShopping.Admin.Controllers
     public class ProductController : Controller
     {
         ObajuShoppingAdmin db = new ObajuShoppingAdmin();
+        private ProductService productService = new ProductService();
+
 
         public ActionResult List()
         {
@@ -27,38 +30,40 @@ namespace ObajuShopping.Admin.Controllers
 
         }
 
-        //public ActionResult PageData(IDataTablesRequest request)
-        //{
-        //    var data = db.Product.ToList();
-        //    var filteredData = db.Product.Where(p => p.name.Contains(request.Search.Value));
-        //    var dataPage = filteredData.Skip(request.Start).Take(request.Length);
-        //    var response = DataTablesResponse.Create(request, data.Count(), filteredData.Count(), dataPage);
-        //    return new DataTablesJsonResult(response, JsonRequestBehavior.AllowGet);
-        //}
-        public ActionResult Create()
+        public JsonResult Get([DataSourceRequest] DataSourceRequest request)
         {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
-        {
-            db.Product.Add(product);
-            db.SaveChanges();
+            var products = db.Product.ToList();
 
-            return RedirectToAction("List", "Product");
+            return this.Json(productService.Read().ToDataSourceResult(request));
         }
 
-        public static IEnumerable<Product> GetProducts()
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult Create([DataSourceRequest] DataSourceRequest request, Models.Product product)
         {
-            var db = new ObajuShoppingAdmin();
-            return db.Product.ToList();
+
+            if (product != null && ModelState.IsValid)
+            {
+                var productToCreate = new Product
+                {
+                    id = product.id,
+                    name = product.name,
+                    price = product.price,
+                    quantity = product.quantity,
+                    description = product.description,
+                    photo = product.photo,
+                    status = product.status,
+                    specials = product.specials
+                };
+
+                db.Product.Add(productToCreate);
+                db.SaveChanges();
+
+            }
+
+            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+
         }
 
-        public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
-        {
-            return Json(GetProducts().ToDataSourceResult(request));
-        }
         public ActionResult Edit()
         {
             return View();

@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace ObajuShopping.Admin.Models
 {
     using System;
@@ -15,10 +17,15 @@ namespace ObajuShopping.Admin.Models
     public partial class Product
     {
         public int id { get; set; }
+        [Required]
         public string name { get; set; }
+        [Required]
         public decimal price { get; set; }
+        [Required]
         public int quantity { get; set; }
+        [Required]
         public bool status { get; set; }
+        [Required]
         public string photo { get; set; }
         public bool specials { get; set; }
         public string description { get; set; }

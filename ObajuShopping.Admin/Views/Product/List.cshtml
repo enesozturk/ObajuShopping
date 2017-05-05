@@ -1,4 +1,5 @@
 ﻿@using Kendo.Mvc.UI
+@using ObajuShopping.Admin.Models
 
 @{
     ViewBag.Title = "List";
@@ -23,39 +24,90 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div id="products-grid person-list" class="k-gid">
-                        @(Html.Kendo().Grid<ObajuShopping.Admin.Models.Product>
-                              ()
+                        @(Html.Kendo().Grid<ObajuShopping.Admin.Models.Product>().Name("Products").Columns(c =>
+                    {
+                        c.Bound(p => p.name);
+                        c.Bound(p => p.quantity);
+                        c.Bound(p => p.price);
+                        c.Bound(p => p.specials);
+                        c.Bound(p => p.photo);
+                        c.Bound(p => p.description);
+                        c.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+                    })
+                        .DataSource(d => d
+                            .Ajax()
+                            .Read(r => r.Action("Get", "Product"))
+                            .Update(u => u.Action("Update", "Product"))
+                            .Destroy(x => x.Action("Delete", "Product"))
+                            .Create(c => c.Action("Create", "Product"))
+                            .PageSize(5)
+                            .Model(m =>
+                            {
+                                m.Id(p=>p.id);
+                            })
+                        )
+                        .Pageable()
+                        .Groupable()
+                        .Sortable()
+                        .Filterable()
+                        .Editable(e => e.Mode(GridEditMode.InLine))
+                        .ToolBar(t => t.Create())
+                        )  
+                        
+
+                        @*@(Html.Kendo().Grid<ObajuShopping.Admin.Models.Product>()
                               .Name("grid")
-                              .ToolBar(tools=>tools.Pdf())
-                              .Pdf(pdf=>pdf
-                              .AllPages()
-                              .AvoidLinks()
-                              .PaperSize("A4")
-                              .Scale(0.8)
-                              .Margin("2cm","1cm","1cm","1cm")
-                              .Landscape().RepeatHeaders()
-                              .TemplateId("page-template")
-                              .FileName("Kendo UI Grid Export.pdf")
-                              .ProxyURL(Url.Action("Pdf_Export_Save","Grid"))
-                              )
                               .Columns(columns =>
                               {
-                                  columns.Bound(c => c.photo);
-                                  columns.Bound(c => c.name);
-                                  columns.Bound(c => c.price);
-                                  columns.Bound(c => c.description);
-                                  columns.Bound(c => c.quantity);
+                                  columns.Bound(product => product.id).Width(100);
+                                  columns.Bound(product => product.name);
+                                  columns.Bound(product => product.price);
+                                  columns.Bound(product => product.quantity);
+                                  columns.Bound(product => product.description);
+                                  columns.Bound(product => product.quantity);
+                                  columns.Command(commands =>
+                                  {
+                                      commands.Destroy(); // The "destroy" command removes data items.
+                                  }).Title("Commands").Width(200);
                               })
-                              .HtmlAttributes(new {style = "height: 550px;"})
-                              .Scrollable()
-                              .Groupable()
-                              .Sortable()
-                              .Pageable(pageable => pageable.Refresh(true).PageSizes(true).ButtonCount(5))
-                              .DataSource(d => d.Ajax().Read(r => r.Action("Products_Read", "Product"))
-                                  .PageSize(20)
+                              .ToolBar(toolbar =>
+                              {
+                                  toolbar.Create(); // The "create" command adds new data items.
+                                  toolbar.Save(); // The "save" command saves the changed data items.
+                              })
+                              .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell editing mode.
+                              .DataSource(dataSource =>
+                                  dataSource.Ajax()
+                                      .Batch(true) // Enable batch updates.
+                                      .Model(model =>
+                                      {
+                                          model.Id(product => product.id); // Specify the property which is the unique identifier of the model.
+                                          model.Field(product => product.id).Editable(false); // Make the ProductID property not editable.
+                                      })
+                                      .Create(create => create.Action("Products_Create", "Product")) // Action method invoked when the user saves a new data item.
+                                      .Read(read => read.Action("Products_Read", "Product")) // Action method invoked when the grid needs data.
+                                      .Update(update => update.Action("Products_Update", "Product")) // Action method invoked when the user saves an updated data item.
+                                      .Destroy(destroy => destroy.Action("Products_Destroy", "Product")) // Action method invoked when the user removes a data item.
                               )
-                              )
+                              .Pageable()
+                              )*@
                     </div>
+                    <script type="text/javascript">
+                     function error_handler(e) {
+                         if (e.errors) {
+                             var message = "Errors:\n";
+                             $.each(e.errors, function (key, value) {
+                                 if ('errors' in value) {
+                                     $.each(value.errors, function () {
+                                         message += this + "\n";
+                                     });
+                                 }
+                             });
+                             alert(message);
+                         }
+                     }
+                    </script>
+
                 </div>
             </div>
         </div>
