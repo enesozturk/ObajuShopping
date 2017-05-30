@@ -23,45 +23,45 @@ namespace ObajuShopping.Admin.Controllers
         {
             return View();
         }
-        public ActionResult ProductList()
+
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var products = db.Product.OrderBy(p => p.name).ToList();
-            return Json(products, JsonRequestBehavior.AllowGet);
-
-        }
-
-        public JsonResult Get([DataSourceRequest] DataSourceRequest request)
-        {
-            var products = db.Product.ToList();
-
-            return this.Json(productService.Read().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public JsonResult Create([DataSourceRequest] DataSourceRequest request, Models.Product product)
+        public JsonResult Create([DataSourceRequest] DataSourceRequest request, ProductViewModel product)
         {
-
             if (product != null && ModelState.IsValid)
             {
-                var productToCreate = new Product
-                {
-                    id = product.id,
-                    name = product.name,
-                    price = product.price,
-                    quantity = product.quantity,
-                    description = product.description,
-                    photo = product.photo,
-                    status = product.status,
-                    specials = product.specials
-                };
-
-                db.Product.Add(productToCreate);
-                db.SaveChanges();
-
+                productService.Create(product);
             }
 
-            return Json(ModelState.IsValid ? true : ModelState.ToDataSourceResult());
+            return Json(new[] { product }.ToDataSourceResult(request, ModelState));
+            
 
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Update([DataSourceRequest] DataSourceRequest request, ProductViewModel product)
+        {
+            if (product != null && ModelState.IsValid)
+            {
+                productService.Update(product);
+            }
+
+            return Json(new[] { product }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Delete([DataSourceRequest] DataSourceRequest request, ProductViewModel product)
+        {
+            if (product != null)
+            {
+                productService.Destroy(product);
+            }
+
+            return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 
         public ActionResult Edit()

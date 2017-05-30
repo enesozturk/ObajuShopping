@@ -29,5 +29,6 @@ namespace ObajuShopping.Admin.Models
         public string photo { get; set; }
         public bool specials { get; set; }
         public string description { get; set; }
+        
     }
 }

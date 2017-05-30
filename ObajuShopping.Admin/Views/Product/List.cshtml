@@ -24,33 +24,34 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div id="products-grid person-list" class="k-gid">
-                        @(Html.Kendo().Grid<ObajuShopping.Admin.Models.Product>().Name("Products").Columns(c =>
+                        @(Html.Kendo().Grid<ObajuShopping.Admin.Models.ProductViewModel>().Name("Products").Columns(c =>
                     {
-                        c.Bound(p => p.name);
-                        c.Bound(p => p.quantity);
-                        c.Bound(p => p.price);
-                        c.Bound(p => p.specials);
-                        c.Bound(p => p.photo);
-                        c.Bound(p => p.description);
+                        c.Bound(p => p.ProductName);
+                        c.Bound(p => p.ProductPhoto);
+                        c.Bound(p => p.ProductPrice);
+                        c.Bound(p => p.ProductSpecials);
+                        c.Bound(p => p.UnitsInStock);
+                        c.Bound(p => p.ProductDescription);
                         c.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
                     })
                         .DataSource(d => d
                             .Ajax()
-                            .Read(r => r.Action("Get", "Product"))
+                            .Read(r => r.Action("Read", "Product"))
                             .Update(u => u.Action("Update", "Product"))
                             .Destroy(x => x.Action("Delete", "Product"))
                             .Create(c => c.Action("Create", "Product"))
                             .PageSize(5)
                             .Model(m =>
                             {
-                                m.Id(p=>p.id);
+                                m.Id(p=>p.ProductID);
                             })
                         )
                         .Pageable()
                         .Groupable()
                         .Sortable()
                         .Filterable()
-                        .Editable(e => e.Mode(GridEditMode.InLine))
+                        .Editable(e => e.Mode(GridEditMode.PopUp))
+                        .HtmlAttributes(new{style="height:550px;"})
                         .ToolBar(t => t.Create())
                         )  
                         

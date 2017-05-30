@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using ObajuShopping.Admin.Models;
 
@@ -8,56 +9,99 @@ namespace ObajuShopping.Admin.Services
 {
     public class ProductService : IDisposable
     {
-        private static bool UpdateDatabase = false;
+        private static bool UpdateDatabase = true;
         private ObajuShoppingAdmin db = new ObajuShoppingAdmin();
-        
 
-        public IList<Product> GetAll()
+        
+        public IList<ProductViewModel> GetAll()
         {
-            IList<Product> result = new List<Product>();
-            result = db.Product.ToList();
+            IList<ProductViewModel> result = new List<ProductViewModel>();
+
+            result = db.Product.Select(product => new ProductViewModel
+            {
+                ProductID = product.id,
+                ProductName = product.name,
+                UnitsInStock = product.quantity,
+                ProductPrice = product.price,
+                ProductSpecials = product.specials,
+                ProductPhoto = product.photo,
+                ProductDescription = product.description,
+                ProductStatus = product.status
+            }).ToList();
+
             return result;
         }
 
-        public IEnumerable<Product> Read()
+        public IEnumerable<ProductViewModel> Read()
         {
             return GetAll();
         }
 
-        public void Create(Product product)
+        public void Create(ProductViewModel product)
         {
             if (!UpdateDatabase)
             {
-                var first = GetAll().OrderByDescending(p => p.id).FirstOrDefault();
-                var id = (first != null) ? first.id : 0;
+                var first = GetAll().OrderByDescending(p => p.ProductID).FirstOrDefault();
+                var id = (first != null) ? first.ProductID : 0;
 
-                product.id = id + 1;
+                product.ProductID = id + 1;
                 GetAll().Insert(0, product);
             }
             else
             {
                 var entity = new Product();
-                entity.id = product.id;
-                entity.name = product.name;
-                entity.quantity = product.quantity;
-                entity.description = product.description;
-                entity.photo = product.photo;
-                entity.price = product.price;
-                entity.specials = product.specials;
-                entity.status = product.status;
+                entity.id = product.ProductID;
+                entity.name = product.ProductName;
+                entity.quantity = product.UnitsInStock;
+                entity.description = product.ProductDescription;
+                entity.photo = product.ProductPhoto;
+                entity.price = product.ProductPrice;
+                entity.specials = product.ProductSpecials;
+                entity.status = product.ProductStatus;
 
                 db.Product.Add(entity);
                 db.SaveChanges();
 
-                product.id = entity.id;
+                product.ProductID = entity.id;
             }
         }
 
-        public void Destroy(Product product)
+
+        public void Update(ProductViewModel product)
         {
             if (!UpdateDatabase)
             {
-                var target = GetAll().FirstOrDefault(p => p.id == product.id);
+                var target = One(e => e.ProductID == product.ProductID);
+
+                if (target != null)
+                {
+                    target.ProductName = product.ProductName;
+                    target.UnitsInStock = product.UnitsInStock;
+                }
+            }
+            else
+            {
+                var entity = new Product();
+                entity.id = product.ProductID;
+                entity.name = product.ProductName;
+                entity.quantity = product.UnitsInStock;
+                entity.description = product.ProductDescription;
+                entity.price = product.ProductPrice;
+                entity.specials = product.ProductSpecials;
+                entity.status = product.ProductStatus;
+                entity.photo = product.ProductPhoto;
+
+                db.Product.Attach(entity);
+                db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Destroy(ProductViewModel product)
+        {
+            if (!UpdateDatabase)
+            {
+                var target = GetAll().FirstOrDefault(p => p.ProductID == product.ProductID);
                 if (target != null)
                 {
                     GetAll().Remove(target);
@@ -66,16 +110,23 @@ namespace ObajuShopping.Admin.Services
             else
             {
                 var entity = new Product();
-                entity.id = product.id;
+                entity.id = product.ProductID;
                 db.Product.Attach(entity);
                 db.Product.Remove(entity);
                 db.SaveChanges();
             }
         }
 
+        public ProductViewModel One(Func<ProductViewModel, bool> predicate)
+        {
+            var sonuc = GetAll().FirstOrDefault();
+            return GetAll().FirstOrDefault(predicate);
+        }
+
         public void Dispose()
         {
             db.Dispose();
         }
+
     }
 }
