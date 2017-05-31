@@ -1,44 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ObajuShopping.Admin.Models;
+using ObajuShopping.Admin.Services;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
 
 namespace ObajuShopping.Admin.Controllers
 {
     public class CategoryController : Controller
     {
         ObajuShoppingAdmin db = new ObajuShoppingAdmin();
+        private CategoryService categoryService = new CategoryService();
 
         public ActionResult List()
         {
             return View();
         }
-        public ActionResult CategoryList()
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var categories = db.Category.Select(s=> new { s.id, s.name, s.isActive }).OrderBy(p => p.name);
-            return Json(categories, JsonRequestBehavior.AllowGet);
+            return Json(categoryService.Read().ToDataSourceResult(request));
         }
-        public ActionResult Create()
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult Create([DataSourceRequest] DataSourceRequest request, CategoryViewModel category)
         {
-            return View();
+            if (category != null && ModelState.IsValid) categoryService.Create(category);
+            return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
-        public ActionResult Edit()
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Update([DataSourceRequest] DataSourceRequest request, CategoryViewModel category)
         {
-            return View();
+            if (category != null && ModelState.IsValid) categoryService.Update(category);
+            return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
-        public ActionResult Delete()
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Delete([DataSourceRequest] DataSourceRequest request, CategoryViewModel category)
         {
-            return View();
-        }
-        public ActionResult AddProduct()
-        {
-            return View();
-        }
-        public ActionResult UpdateProduct()
-        {
-            return View();
+            if (category != null) categoryService.Destroy(category);
+            return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
     }
 }

@@ -1,55 +1,69 @@
-﻿
+﻿@using Kendo.Mvc.UI
+
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "/Category/CategoryList",
-            method: 'post',
-            dataType: 'json',
-            success: function (data) {
-                table({
-                    data: data,
-                    columns: [
-                        { "data": "id", "autoWidth": true },
-                        { "data": "name", "autoWidth": true },
-                        { "data": "isActive", "autoWidth": true },
-                    ]
-                })
-            }
-        })
-    })
-</script>
 
 <form action="/" method="post">
     <div class="content-header clearfix">
-        <h1 class="pull-left" style="/*float:left !important;*/">Categories <small>some text</small></h1>
-        <div class="pull-right" style="display:block;box-sizing:border-box;margin-top:15px;">
-            <a href="@Url.Action("Create","Product")" class="btn bg-success"><i class="fa fa-plus-square"></i> Add New</a>
-            <button type="button" class="btn bg-info">Download catalog as PDF</button>
-            <button type="button" class="btn bg-info">Export</button>
-            <button type="button" class="btn bg-success">Import</button>
-            <button type="button" class="btn bg-danger"><i class="fa fa-trash-o"></i> Delete</button>
-        </div>
+        <h1 class="pull-left">Categories</h1>
     </div>
     <div class="content">
         <div class="form-horizontal">
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div id="products-grid person-list" class="k-gid">
-                        <table id="category-list-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Category Name</th>
-                                    <th>Is Active</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                        @(Html.Kendo()
+                            .Grid<ObajuShopping.Admin.Models.CategoryViewModel>()
+                            .Name("Categories")
+                            .Columns(c =>
+                            {
+                                c.Bound(cat => cat.CategoryName);
+                                c.Bound(cat => cat.CategoryTopCat);
+                                c.Bound(cat => cat.CategoryIsActive);
+                                c.Command(com =>
+                                {
+                                    com.Edit();
+                                    com.Destroy();
+                                });
+                            })
+                            .DataSource(d => d
+                                .Ajax()
+                                .Read(r => r.Action("Read", "Category"))
+                                .Update(r => r.Action("Update", "Category"))
+                                .Destroy(r => r.Action("Delete", "Category"))
+                                .Create(r => r.Action("Create", "Category"))
+                                .PageSize(10)
+                                .Model(m =>
+                                {
+                                    m.Id(c => c.CategoryID);
+                                })
+                            )
+                            .Pageable()
+                            .Groupable()
+                            .Sortable()
+                            .Filterable()
+                            .Editable(e => e.Mode(GridEditMode.PopUp))
+                            .HtmlAttributes(new { style = "height:550px;" })
+                            .ToolBar(t => t.Create())
+                        )
                     </div>
+                    <script type="text/javascript">
+                        function error_handler(e) {
+                            if (e.errors) {
+                                var message = "Errors:\n";
+                                $.each(e.errors, function (key, value) {
+                                    if ('errors' in value) {
+                                        $.each(value.errors, function () {
+                                            message += this + "\n";
+                                        });
+                                    }
+                                });
+                                alert(message);
+                            }
+                        }
+                    </script>
                 </div>
             </div>
         </div>

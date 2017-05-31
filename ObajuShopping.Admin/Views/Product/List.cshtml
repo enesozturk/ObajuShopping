@@ -1,23 +1,13 @@
 ﻿@using Kendo.Mvc.UI
-@using ObajuShopping.Admin.Models
 
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
-    $(document).ready()
-</script>
 
 <form action="/" method="post">
     <div class="content-header clearfix">
-        <h1 class="pull-left" style="/*float:left !important;*/">Products <small>List</small></h1>
-        <div class="pull-right" style="display:block;box-sizing:border-box;margin-top:15px;">
-            <a href="@Url.Action("Create","Product")" class="btn bg-success"><i class="fa fa-plus-square"></i> Add New</a>
-            <button type="button" class="btn bg-info">Export</button>
-            <button type="button" class="btn bg-success">Import</button>
-            <button type="button" class="btn bg-danger"><i class="fa fa-trash-o"></i> Delete</button>
-        </div>
+        <h1 class="pull-left">Products</h1>
     </div>
     <div class="content">
         <div class="form-horizontal">
@@ -43,7 +33,7 @@
                             .PageSize(5)
                             .Model(m =>
                             {
-                                m.Id(p=>p.ProductID);
+                                m.Id(p => p.ProductID);
                             })
                         )
                         .Pageable()
@@ -51,62 +41,25 @@
                         .Sortable()
                         .Filterable()
                         .Editable(e => e.Mode(GridEditMode.PopUp))
-                        .HtmlAttributes(new{style="height:550px;"})
+                        .HtmlAttributes(new { style = "height:550px;" })
                         .ToolBar(t => t.Create())
-                        )  
-                        
+                        )
 
-                        @*@(Html.Kendo().Grid<ObajuShopping.Admin.Models.Product>()
-                              .Name("grid")
-                              .Columns(columns =>
-                              {
-                                  columns.Bound(product => product.id).Width(100);
-                                  columns.Bound(product => product.name);
-                                  columns.Bound(product => product.price);
-                                  columns.Bound(product => product.quantity);
-                                  columns.Bound(product => product.description);
-                                  columns.Bound(product => product.quantity);
-                                  columns.Command(commands =>
-                                  {
-                                      commands.Destroy(); // The "destroy" command removes data items.
-                                  }).Title("Commands").Width(200);
-                              })
-                              .ToolBar(toolbar =>
-                              {
-                                  toolbar.Create(); // The "create" command adds new data items.
-                                  toolbar.Save(); // The "save" command saves the changed data items.
-                              })
-                              .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell editing mode.
-                              .DataSource(dataSource =>
-                                  dataSource.Ajax()
-                                      .Batch(true) // Enable batch updates.
-                                      .Model(model =>
-                                      {
-                                          model.Id(product => product.id); // Specify the property which is the unique identifier of the model.
-                                          model.Field(product => product.id).Editable(false); // Make the ProductID property not editable.
-                                      })
-                                      .Create(create => create.Action("Products_Create", "Product")) // Action method invoked when the user saves a new data item.
-                                      .Read(read => read.Action("Products_Read", "Product")) // Action method invoked when the grid needs data.
-                                      .Update(update => update.Action("Products_Update", "Product")) // Action method invoked when the user saves an updated data item.
-                                      .Destroy(destroy => destroy.Action("Products_Destroy", "Product")) // Action method invoked when the user removes a data item.
-                              )
-                              .Pageable()
-                              )*@
                     </div>
                     <script type="text/javascript">
-                     function error_handler(e) {
-                         if (e.errors) {
-                             var message = "Errors:\n";
-                             $.each(e.errors, function (key, value) {
-                                 if ('errors' in value) {
-                                     $.each(value.errors, function () {
-                                         message += this + "\n";
-                                     });
-                                 }
-                             });
-                             alert(message);
-                         }
-                     }
+                        function error_handler(e) {
+                            if (e.errors) {
+                                var message = "Errors:\n";
+                                $.each(e.errors, function (key, value) {
+                                    if ('errors' in value) {
+                                        $.each(value.errors, function () {
+                                            message += this + "\n";
+                                        });
+                                    }
+                                });
+                                alert(message);
+                            }
+                        }
                     </script>
 
                 </div>

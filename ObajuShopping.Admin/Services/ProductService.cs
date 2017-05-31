@@ -12,7 +12,6 @@ namespace ObajuShopping.Admin.Services
         private static bool UpdateDatabase = true;
         private ObajuShoppingAdmin db = new ObajuShoppingAdmin();
 
-        
         public IList<ProductViewModel> GetAll()
         {
             IList<ProductViewModel> result = new List<ProductViewModel>();
@@ -66,18 +65,17 @@ namespace ObajuShopping.Admin.Services
             }
         }
 
-
         public void Update(ProductViewModel product)
         {
             if (!UpdateDatabase)
             {
-                var target = One(e => e.ProductID == product.ProductID);
+                //var target = One(e => e.ProductID == product.ProductID);
 
-                if (target != null)
-                {
-                    target.ProductName = product.ProductName;
-                    target.UnitsInStock = product.UnitsInStock;
-                }
+                //if (target != null)
+                //{
+                //    target.ProductName = product.ProductName;
+                //    target.UnitsInStock = product.UnitsInStock;
+                //}
             }
             else
             {
@@ -101,11 +99,11 @@ namespace ObajuShopping.Admin.Services
         {
             if (!UpdateDatabase)
             {
-                var target = GetAll().FirstOrDefault(p => p.ProductID == product.ProductID);
-                if (target != null)
-                {
-                    GetAll().Remove(target);
-                }
+                //var target = GetAll().FirstOrDefault(p => p.ProductID == product.ProductID);
+                //if (target != null)
+                //{
+                //    GetAll().Remove(target);
+                //}
             }
             else
             {
@@ -119,7 +117,7 @@ namespace ObajuShopping.Admin.Services
 
         public ProductViewModel One(Func<ProductViewModel, bool> predicate)
         {
-            var sonuc = GetAll().FirstOrDefault();
+            var result = GetAll().FirstOrDefault();
             return GetAll().FirstOrDefault(predicate);
         }
 
