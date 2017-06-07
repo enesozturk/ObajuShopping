@@ -27,5 +27,6 @@ namespace ObajuShopping.Admin.Models
     
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Blog> Blog { get; set; }
     }
 }

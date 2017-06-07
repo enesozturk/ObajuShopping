@@ -14,3 +14,5 @@
 /ObajuShopping.Services/bin/Debug
 /ObajuShopping.Admin/Content/kendo
 /ObajuShopping.Admin/Scripts/kendo
+/ObajuShopping.Admin/node_modules
+/ObajuShopping.Admin/Scripts/ckeditor

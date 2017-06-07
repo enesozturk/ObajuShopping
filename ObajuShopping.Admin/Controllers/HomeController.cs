@@ -13,11 +13,14 @@ namespace ObajuShopping.Admin.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public JsonResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return Json(new
+            {
+                Name = "Enes",
+                Surname = "Ozturk",
+                Description = "Bilgisayar Mühendisi Öğrencisi. Yamaçparaşütü pilotu"
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Contact()

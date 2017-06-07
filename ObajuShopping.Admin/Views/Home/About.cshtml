@@ -1,7 +1,73 @@
 ﻿@{
     ViewBag.Title = "About";
+    var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    var serverUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+    var controllerUrl = Url.Content("~") + controllerName;
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+
+@using (Ajax.BeginForm("About", "Home",
+                null,
+                new AjaxOptions
+                {
+
+                },
+                new { id = "ornek-form" }))
+{
+    <span>Enter blog id: @Html.TextBox("fno")</span>
+    <button type="submit">Ara</button>
+}
+
+
+<div id="app">
+    <h1>{{message}}</h1>
+    <span>coming straight from mvc!  {{isim}}</span>
+</div>
+
+<script>
+    window.ServerUrl = '@serverUrl';
+    window.VueRouterUrl = '@controllerUrl';
+</script>
+@Scripts.Render("~/node_modules/vue/dist/vue.min.js")
+
+<script>
+    var v = new Vue({
+        el: '#app',
+        ready: function () {
+            //this.loadData()
+            this.getEnes()
+        },
+        data: {
+            message: 'Enes',
+            kullanıcı: [],
+            serverData: null
+        },
+        methods: {
+            loadData: function (viewerUserId, posterUserId) {
+                const that = this;
+
+                $.ajax({
+                    contentType: "application/json",
+                    dataType: "json",
+                    url: window.ServerUrl + "/Home/About",
+                    method: "GET",
+                    success: function (response) {
+                        console.log(response);
+                        that.$data.serverData = response;
+                    },
+                    error: function () {
+                        console.log("Ops!");
+                    }
+                })
+            },
+            getEnes: function () {
+                this.$http.get('Home/About')
+                    .then(function (response) {
+                        this.$set('kullanici', response);
+                    })
+                    .catch(function (error) { })
+            }
+
+        }
+    })
+</script>

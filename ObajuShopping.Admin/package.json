@@ -1,0 +1,14 @@
+{
+  "name": "obajushopping.admin",
+  "version": "1.0.0",
+  "description": "Obajushopping admin panel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Enes Ozturk",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.3.3"
+  }
+}

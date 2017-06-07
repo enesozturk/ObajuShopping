@@ -14,6 +14,9 @@ namespace ObajuShopping.Admin
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/ckeditor").Include(
+                        "~/Scripts/ckeditor/ckeditor.js"));
+
             // Geliştirme yapmak ve öğrenmek için Modernizr'ın geliştirme sürümünü kullanın. Daha sonra,
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -28,11 +31,14 @@ namespace ObajuShopping.Admin
                       "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                 "~/Scripts/kendo/kendo.all.min.js",
-                "~/Scripts/kendo/kendo.aspnetmvc.min.js"
+                "~/Scripts/kendo/kendo.aspnetmvc.min.js",
+                "~/Scripts/kendo.responsivepanel.min.js"
             ));
             bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
                 "~/Content/kendo/kendo.common-bootstrap.min.css",
-                "~/Content/kendo/kendo.bootstrap.min.css"));
+                "~/Content/kendo/kendo.bootstrap.min.css",
+                "~/Content/kendo/kendo.bootstrap.mobile.min.css"));
+
             bundles.IgnoreList.Clear();
         }
     }

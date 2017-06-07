@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using ObajuShopping.Admin.Models;
+using ObajuShopping.Admin.ViewModels;
 using ObajuShopping.Admin.Services;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;

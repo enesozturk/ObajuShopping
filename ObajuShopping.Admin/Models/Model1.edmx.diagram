@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Product" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Kurumsal_ObajuShoppingModel.FK_Category_Category" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Kurumsal_ObajuShoppingModel.Blog" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

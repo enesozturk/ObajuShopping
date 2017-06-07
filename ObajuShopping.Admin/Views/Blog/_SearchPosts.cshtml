@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ObajuShopping.Admin.Models.Blog>
+
+@foreach (var p in Model)
+{
+    <tr>
+        <td>@p.baslik</td>
+        <td>@p.baslikresim</td>
+        <td>@p.tarih</td>
+        
+    </tr>
+}

@@ -1,0 +1,272 @@
+﻿@model ObajuShopping.Admin.ViewModels.BlogViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        //Confirm = "Are you sure to start search?",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "divLoading"
+    };
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Search Blog</h1>
+    </div>
+    <div class="col-lg-12">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Add New Post</button><br /><hr />
+
+
+        @*Add new post modal*@
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Post</h4>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Create", "Blog", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <h4>BlogViewModel</h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BlogAuthor, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.BlogAuthor, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BlogAuthor, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BlogDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.BlogDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BlogDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BlogTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.BlogTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BlogTitle, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BlogImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.BlogImage, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BlogImage, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BlogContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.BlogContent, new { @class = "ckeditor" })
+                                        @Html.ValidationMessageFor(model => model.BlogContent, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="modalWrapper">
+            
+        </div>
+
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Your Posts
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    @Html.Hidden("id","hidden")
+                                    <th>Id</th>
+                                    <th>Başlık</th>
+                                    <th>Resim</th>
+                                </tr>
+                            </thead>
+                            <tbody id="searchResult"></tbody>
+                        </table>
+
+                        @*<input type="text" id="keyword" class="keyword" name="name" />
+                            <button type="button" onclick="getPostByTitle(document.getElementById('keyword').value)">Search</button>*@
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+
+<script>
+
+    function openEditModal(id) {
+        $.ajax({
+            url: '/Blog/Update/' + id, // The method name + paramater
+            success: function (data) {
+                $('#modalWrapper').html(data); // This should be an empty div where you can inject your new html (the partial view)
+                $('#editModal').modal();
+            }
+        });
+
+    }
+
+    $(document).ready(function () {
+        getPosts()
+    });
+
+    var isUpdateable = false;
+
+    //get posts list
+    function getPosts() {
+        $.ajax({
+            url: '/Blog/GetPosts/',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                var rows = '';
+                $.each(data, function (i, item) {
+                    rows += "<tr>"
+                    rows += "<td>" + item.id + "</td>"
+                    rows += "<td>" + item.baslik + "</td>"
+                    rows += "<td>" + item.baslikresim + "</td>"
+                    rows += "<td><a type='button' id='btnEdit' class='btn btn-default' onclick='return openEditModal(" + item.id + ");'>Edit</a> <button type='button' id='btnDelete' class='btn btn-danger' onclick='return deleteProductById(" + item.id + ")'>Delete</button></td>"
+                    rows += "</tr>";
+                    $("#searchResult").html(rows);
+                });
+            }
+        })
+    }
+
+    //add zero to single number for date strings
+    function addZ(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function deleteProductById(id) {
+        $.ajax({
+            url: "/Blog/Delete/" + id,
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+                getPosts();
+            },
+            error: function (err) {
+                alert("Error: " + err.responseText);
+            }
+        });
+    }
+
+    //get post by id
+    function getPostById(id) {
+        $.ajax({
+            type: 'GET',
+            url: '/Blog/Get/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var date = new Date(parseInt(data.tarih.substr(6)));
+                var year = date.getFullYear();
+                var month = addZ(date.getMonth());
+                var day = addZ(date.getDay());
+
+                $('#title').val(data.baslik);
+                $('#author').val(data.yazar);
+                $('#content').val(data.icerik)
+                $('#date').val(year + "-" + month + "-" + day)
+
+                isUpdateable = true;
+                console.log(isUpdateable)
+            },
+            error: function (err) {
+                alert("Error: " + err.responseText);
+            }
+        })
+    }
+
+
+    $('#reset').click(function () {
+
+    })
+
+    //add post
+    $('#btnSubmit').click(function (e) {
+        console.log(isUpdateable)
+        var data = {
+            BlogTitle: $('#title').val(),
+            BlogImage: $('#image').val(),
+            BlogContent: $('#content-ck').val(),
+            BlogDate: $('#date').val(),
+            BlogAuthor: $('#author').val()
+        }
+        if (!isUpdateable) {
+            //Mvc Post metodları ile modal içerisinde yapıldı.
+        } else {
+            console.log("update")
+            $.ajax({
+                url: '/Blog/Update/',
+                type: 'POST',
+                dataType: 'json',
+                data: data,
+                success: function (data) {
+                    getPosts();
+                    isUpdateable = false;
+                    clear();
+                },
+                error: function (err) {
+                    alert("Error: " + err.responseText);
+                }
+            })
+        }
+
+
+    })
+
+</script>
+
+<style>
+    #frameModal{
+        width:100%;
+        height:100%;
+        border:none;
+    }
+</style>

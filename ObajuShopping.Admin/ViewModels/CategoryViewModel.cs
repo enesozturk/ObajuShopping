@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ObajuShopping.Admin.Models
+namespace ObajuShopping.Admin.ViewModels
 {
     public class CategoryViewModel
     {

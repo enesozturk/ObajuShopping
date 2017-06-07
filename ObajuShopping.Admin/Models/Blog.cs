@@ -12,15 +12,13 @@ namespace ObajuShopping.Admin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Blog
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public decimal price { get; set; }
-        public int quantity { get; set; }
-        public bool status { get; set; }
-        public string photo { get; set; }
-        public bool specials { get; set; }
-        public string description { get; set; }
+        public string yazar { get; set; }
+        public System.DateTime tarih { get; set; }
+        public string baslik { get; set; }
+        public string baslikresim { get; set; }
+        public string icerik { get; set; }
     }
 }
